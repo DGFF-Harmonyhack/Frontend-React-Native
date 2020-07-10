@@ -1,4 +1,6 @@
-// self explanatory?
+// self explanatory? this will prob be like a floating top? 
+// I dunno yet we might just have to include this in every screen 
+
 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
