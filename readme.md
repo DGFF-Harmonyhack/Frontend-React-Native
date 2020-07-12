@@ -8,9 +8,6 @@ ok google how to use react native
 
 // Also, let's use those issue buttons, they totally show up as activity on our profile =)
 
-
-
-
     {/* this is an example of how you can make buttons to navigate with a stack navi, it will auto create a back button  */}
     {/* all you have to do is pass a string to props.navigation.navigate() that is defined in App.js in the routes  */}
     <Button
