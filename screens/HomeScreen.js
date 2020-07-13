@@ -10,7 +10,7 @@ const HomeScreen = props => {
     // boolean switch to see if setListOfSavedReqs needs to be run 
     const [isThereNewSave, setIsThereNewSave] = useState(false)
 
-    // the componentDidMount to load up local memory into the javascript memory
+    // the componentDidMount to load up local memory of saved reqs into the javascript memory
     useEffect(() => {
         // check of local memory has any saved reqs
         // just a placeholder value for listofsavedreqs
@@ -25,9 +25,10 @@ const HomeScreen = props => {
     }, [isThereNewSave]);
 
     return (
-        <View>
+        <View style={styles.main}>
             <Text>The HomeScreen</Text>
             <Text>Welcome to ___________</Text>
+            {/* custom button component  */}
             <BigMainButton  />
             {/* i think these should probably be replaced by custom components to style + css up */}
             <Button 
@@ -44,6 +45,7 @@ const HomeScreen = props => {
         </View>
     )
 }
+// this is literally just here so we have a template to mess with when we google styling 
 const styles = StyleSheet.create({
     main: {
         flex: 0.3

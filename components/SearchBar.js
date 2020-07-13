@@ -1,6 +1,5 @@
 // search params basically, 4/5
 
-
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
