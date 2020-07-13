@@ -46,7 +46,7 @@ const HomeScreen = props => {
 }
 const styles = StyleSheet.create({
     main: {
-        flex: 1
+        flex: 0.3
     }
 })
 export default HomeScreen; 
