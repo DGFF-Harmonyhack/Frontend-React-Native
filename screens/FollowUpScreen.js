@@ -14,7 +14,7 @@ const FollowUpScreen = props => {
 
 const styles = StyleSheet.create({
     main: {
-        flex: 1
+        flex: 0.3
     }
 })
 

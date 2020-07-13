@@ -7,13 +7,14 @@ const ConfirmationScreen = props => {
     return (
         <View>
             <Text>The ConfirmationScreen</Text>
+
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     main: {
-        flex: 1
+        flex: 0.3
     }
 })
 
