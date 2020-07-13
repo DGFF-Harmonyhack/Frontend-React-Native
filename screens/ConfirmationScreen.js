@@ -7,6 +7,7 @@ const ConfirmationScreen = props => {
     return (
         <View>
             <Text>The ConfirmationScreen</Text>
+            
         </View>
     )
 }
