@@ -20,17 +20,20 @@ export default function Form() {
     return (
         <View style={styles.container}>
             <TextInput placeholder="Description" onChangeText={handleUserInput}/>
+            <View style={{backgroundColor: '#34deeb', padding: 10}}>
             <TouchableOpacity onPress={handlePress}>
-                <Text>
+                <Text style={{textAlign: 'center', fontFamily:'Roboto', color: '#fff'}}>
                     Submit
                 </Text>
-            </TouchableOpacity>          
+            </TouchableOpacity> 
+            </View>         
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
     }
+    
 })
