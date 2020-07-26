@@ -1,23 +1,24 @@
 import React, {useState} from 'react'
-import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function Form() {
+    // state management with hook
     const [userInput, setUserInput] = useState('')
     
-   function handleUserInput(enteredInput){
+   const handleUserInput = (enteredInput) => {
         // set userInput state
         setUserInput(enteredInput)
     }
     
-    handlePress = (evt) => {
-        //try to fetch 
+   const handlePress = (evt) => {
+        //prevent default and maybe fetch in the future
         evt.preventDefault()
         console.log(userInput)
         
     }
     
     return (
-        <View>
+        <View style={styles.container}>
             <TextInput placeholder="Description" onChangeText={handleUserInput}/>
             <TouchableOpacity onPress={handlePress}>
                 <Text>
@@ -27,3 +28,9 @@ export default function Form() {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#fff'
+    }
+})
