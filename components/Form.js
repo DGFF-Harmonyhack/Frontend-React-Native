@@ -19,7 +19,9 @@ export default function Form() {
     
     return (
         <View style={styles.container}>
+            <View style={{padding: 10}}>
             <TextInput placeholder="Description" onChangeText={handleUserInput}/>
+            </View>
             <View style={{backgroundColor: '#34deeb', padding: 10}}>
             <TouchableOpacity onPress={handlePress}>
                 <Text style={{textAlign: 'center', fontFamily:'Roboto', color: '#fff'}}>
