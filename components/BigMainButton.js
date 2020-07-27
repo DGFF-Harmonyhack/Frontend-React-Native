@@ -6,6 +6,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications'
 
+
 const BigMainButton = props => {
     // mimic the syntax and use navigation inside of a component
     const navigation = useNavigation();
