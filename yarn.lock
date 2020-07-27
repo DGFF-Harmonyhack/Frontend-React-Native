@@ -2536,7 +2536,7 @@ expo-notifications@^0.4.0:
     expo-constants "9.1.1"
     uuid "^3.4.0"
 
-expo-permissions@~9.0.1:
+expo-permissions@^9.0.1, expo-permissions@~9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-9.0.1.tgz#dc10b58654bbe39bbbed5827369942b01b08055e"
   integrity sha512-CosJgy8XQRN/OFG2JTQDcFxz3XTGi27coCMym/hVXWtQfk0z6PwdRG5IXHfLGuSckwIcgmirrwm2+Zc0X3MmNg==
