@@ -13,7 +13,7 @@ export default function Form() {
    const handlePress = (evt) => {
         //prevent default and maybe fetch in the future
         evt.preventDefault()
-        console.log(userInput)
+        setUserInput('')
         
     }
     
