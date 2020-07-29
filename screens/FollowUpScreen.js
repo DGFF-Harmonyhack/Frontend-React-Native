@@ -3,13 +3,10 @@
 
 import React from 'react';
 import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
-import React, { useState, useEffect } from 'react';
-
+import Form from '../components/Form'
 
 const FollowUpScreen = props => {
-    const [descriptionField, setDescriptionField] = useState('')
 
-    
 
     return (
         <View>
@@ -20,7 +17,7 @@ const FollowUpScreen = props => {
                 <Button title="I NEED EVIDENCE" /> 
             </View>
             <View>
-                <TextInput /> 
+                <Form />
             </View>
         </View>
     )
