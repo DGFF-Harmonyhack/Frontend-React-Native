@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, View, Text, StyleSheet } from 'react-native';
 import BigMainButton from '../components/BigMainButton'
 import Form from '../components/Form'
-// ask permissions to send notification
+// ask permissions to send notification --GA
 import * as Permissions from 'expo-permissions'
 
 const HomeScreen = props => {
