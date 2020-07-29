@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, View, Text, StyleSheet } from 'react-native';
 import BigMainButton from '../components/BigMainButton'
+import Form from '../components/Form'
 
 const HomeScreen = props => {
     const { navigation } = props
@@ -42,6 +43,8 @@ const HomeScreen = props => {
                     listOfSavedReqs: listOfSavedReqs
                 })}
             />
+
+            <Form/>
         </View>
     )
 }
