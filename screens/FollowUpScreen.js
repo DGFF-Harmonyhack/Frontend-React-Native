@@ -13,8 +13,12 @@ const FollowUpScreen = props => {
             <Text>The FollowUpScreen</Text>
 
             <View>
-                <Button title="I AM SAFE" />
-                <Button title="I NEED EVIDENCE" /> 
+                <Button 
+                    title="I AM SAFE" 
+                />
+                <Button 
+                    title="I NEED EVIDENCE" 
+                /> 
             </View>
             <View>
                 <Form />
