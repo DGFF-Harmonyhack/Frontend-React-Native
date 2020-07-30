@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Button, View, Text, StyleSheet } from 'react-native';
 import BigMainButton from '../components/BigMainButton'
 import Form from '../components/Form'
+// ask permissions to send notification --GA
+import * as Permissions from 'expo-permissions'
 
 const HomeScreen = props => {
     const { navigation } = props
@@ -24,6 +26,20 @@ const HomeScreen = props => {
         }
         // the watch condition to run the useEffect again is any change in the boolean isThereNewSave
     }, [isThereNewSave]);
+    ///check notification permission status -- GA
+    useEffect(() => {
+        Permissions.getAsync(Permissions.NOTIFICATIONS).then(statusObj => {
+            if(statusObj.status !== 'granted'){
+                return Permissions.askAsync(Permissions.NOTIFICATIONS)
+            }
+
+            return statusObj
+        }).then(statusObj => {
+            if(statusObj.status !== 'granted'){
+                return 
+            }
+        })
+    }, [])
 
     return (
         <View style={styles.main}>
