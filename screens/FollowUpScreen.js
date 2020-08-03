@@ -1,7 +1,7 @@
 // in the diagram, this is #2, 
 // it will have all the follow up stuff for the person who pressed the button 
 
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 
 const FollowUpScreen = props => {
@@ -15,6 +15,9 @@ const FollowUpScreen = props => {
         // user id / user uuid / event id / resolved boolean based on which button  
 
         setDescriptionField('');
+
+        // show modal confirm
+        // after modal change screen to home 
     }
 
     const resolutionStatusHandler = (eventStatus) => {
@@ -68,8 +71,6 @@ const FollowUpScreen = props => {
                     accessibilityLabel="Submit your follow up."
                 />
             </View>
-            
-
         </View>
     )
 }
