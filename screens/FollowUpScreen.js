@@ -8,6 +8,15 @@ const FollowUpScreen = props => {
     return (
         <View>
             <Text>The FollowUpScreen</Text>
+{/*             
+            i am safe button, manage state 
+
+            i need evidence button, manage state 
+
+            description field, manage state 
+
+            submit button, update backend, validate if one of the buttons was pressed, preview modal maybe?  */}
+
         </View>
     )
 }
