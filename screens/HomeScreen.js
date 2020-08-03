@@ -1,8 +1,11 @@
 // Obviously the home screen with the giant button and etc 
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text, StyleSheet } from 'react-native';
+import { Button, View, Text, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage'
+
 import BigMainButton from '../components/BigMainButton'
 import Form from '../components/Form'
+import BackendAddress from '../constants/BackendAddress'
 
 const HomeScreen = props => {
     const { navigation } = props
@@ -10,6 +13,8 @@ const HomeScreen = props => {
     const [listOfSavedReqs, setListOfSavedReqs] = useState('')
     // boolean switch to see if setListOfSavedReqs needs to be run 
     const [isThereNewSave, setIsThereNewSave] = useState(false)
+
+    const [userData, setUserData] = useState()
 
     // the componentDidMount to load up local memory of saved reqs into the javascript memory
     useEffect(() => {
@@ -24,6 +29,32 @@ const HomeScreen = props => {
         }
         // the watch condition to run the useEffect again is any change in the boolean isThereNewSave
     }, [isThereNewSave]);
+
+    useEffect(() => {
+        const userIdentificaiton = AsyncStorage.getItem('@user_id')
+        if (userIdentificaiton !== null) {
+            fetch(`${BackendAddress.API}/users/${userIdentificaiton}`)
+            .then((response) => response.json())
+            .then((returnValue) => {
+                setUserData(returnValue)
+                // set the list of saved reqs 
+            })
+        } else {
+            fetch(`${BackendAddress.API}/users`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify()
+            })
+            .then((response) => response.json())
+            .then((returnValue) => {
+                setUserData(returnValue) 
+                AsyncStroage.setItem('@user_id', returnValue.user_id)
+            })
+            Alert.alert()
+        }
+    })
 
     return (
         <View style={styles.main}>
