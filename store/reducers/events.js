@@ -1,7 +1,7 @@
 import { EVENTS } from '../../data/events-data'
 
 const initialState ={
-    events: EVENTS,
+    allEvents: EVENTS,
     filteredEvents: EVENTS,
     savedEvents: []
 }
