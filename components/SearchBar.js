@@ -1,20 +1,24 @@
 // search params basically, 4/5
 
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, Button } from 'react-native';
 
 const SearchBar = props => {
+  console.log('searchbar');
     return (
-        <View>
-            <Text>The SearchBar</Text>
+        <View style={styles.main}>
+            <TextInput placeholder='Type an event search in here' />
+            <Button title="Search" />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     main: {
-        flex: 0.3
+      width: '80%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     }
 })
 
-export default SearchBar; 
+export default SearchBar;
