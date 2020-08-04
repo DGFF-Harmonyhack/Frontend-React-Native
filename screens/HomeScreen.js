@@ -21,7 +21,6 @@ const HomeScreen = props => {
 
     const [userData, setUserData] = useState()
 
-
     // redux testing 
     const allEvents = useSelector(state => state.events.allEvents)
     const savedEvents = useSelector(state => state.events.savedEvents) 
