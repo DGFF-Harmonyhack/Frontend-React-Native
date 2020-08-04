@@ -9,30 +9,24 @@ import BackendAddress from '../../constants/BackendAddress'
 export const fetchEvents = () => {
     return async dispatch => {
         // any async code you want 
+
+
         const response = await fetch(`${BackendAddress.API}/events`)
         const responseData = await response.json()
-        console.log(responseData)
+        console.log(" 1 - fetchEvents is triggered sample event id", responseData[1].id)
+        dispatch({
+            type: SET_EVENTS,
+            events: responseData
+        })
+        // dispatch => {
+        //     dispatch({
+        //         type: SET_EVENTS, 
+        //         events: responseData
+        //     })
+        // }
 
-        
-        // dispatch({
-        //     type: CREATE_EVENT,
-        //     eventData: {
-        //         id: responseData.id,
-        //         location, 
-        //         description, 
-        //         user_id, 
-        //         resolved_stat: responseData.resolved_stat,
-        //         created_at: responseData.created_at,
-        //         updated_at: responseData.updated_at
-        //     }
-        // })
 
-        dispatch => {
-            dispatch({
-                type: SET_EVENTS, 
-                events: []
-            })
-        }
+        // can you double down on asyncs? or do i make another action and trigger it inside homescreen
     }
 }
 
@@ -52,9 +46,9 @@ export const createEvent = (user_id, location, description) => {
                 description
             })
         })
-
         const responseData = await response.json()
-        
+        // console.log(responseData)
+
         dispatch({
             type: CREATE_EVENT,
             eventData: responseData
