@@ -24,7 +24,7 @@ export default function Form() {
             </View>
             <View style={{backgroundColor: '#34deeb', padding: 10}}>
             <TouchableOpacity onPress={handlePress}>
-                <Text style={{textAlign: 'center', fontFamily:'Roboto', color: '#fff'}}>
+                <Text style={{textAlign: 'center', color: '#fff'}}>
                     Submit
                 </Text>
             </TouchableOpacity> 

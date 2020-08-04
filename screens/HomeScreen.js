@@ -11,6 +11,8 @@ import BackendAddress from '../constants/BackendAddress'
 import { useSelector, useDispatch } from 'react-redux'
 import * as eventsActions from '../store/actions/events'
 
+// ask permissions to send notification --GA
+import * as Permissions from 'expo-permissions'
 
 const HomeScreen = props => {
     const { navigation } = props
@@ -50,6 +52,33 @@ const HomeScreen = props => {
     // const testNewEvent = () => {
     //     dispatch(eventsActions.createEvent(test_user_id, test_location, test_description))
     // }
+        // check of local memory has any saved reqs
+        // just a placeholder value for listofsavedreqs
+        // setListOfSavedReqs({
+        //     1 : '1'
+        // })
+        //bc of initial load, check to see if there is new value so it doesn't loop forever from the change arg in useEffect
+        // if(!!isThereNewSave == true) {
+        //     setIsThereNewSave(false)
+        // }
+        // the watch condition to run the useEffect again is any change in the boolean isThereNewSave
+    // }, [isThereNewSave]);
+
+    
+    ///check notification permission status -- GA
+    useEffect(() => {
+        Permissions.getAsync(Permissions.NOTIFICATIONS).then(statusObj => {
+            if(statusObj.status !== 'granted'){
+                return Permissions.askAsync(Permissions.NOTIFICATIONS)
+            }
+
+            return statusObj
+        }).then(statusObj => {
+            if(statusObj.status !== 'granted'){
+                return 
+            }
+        })
+    }, [])
 
     return (
         <View style={styles.main}>
