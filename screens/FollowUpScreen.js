@@ -10,6 +10,7 @@ const FollowUpScreen = props => {
     const [isResolved, setIsResolved] = useState(false)
 
 
+    
     const submitHandler = () => {
         // this will make an update, should probably send 
         // user id / user uuid / event id / resolved boolean based on which button  
