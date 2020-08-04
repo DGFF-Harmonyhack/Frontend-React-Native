@@ -15,10 +15,10 @@ const Map = props => {
 
 const styles = StyleSheet.create({
     main: {
-      width: '80%',
       borderColor: 'blue',
       borderWidth: 2,
-      flexGrow: 1
+      flexGrow: 1,
+      backgroundColor: 'blueviolet'
     }
 })
 
