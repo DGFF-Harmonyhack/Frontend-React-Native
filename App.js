@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 //Navigation stuff
@@ -10,6 +10,9 @@ import ConfirmationScreen from './screens/ConfirmationScreen'
 import FollowUpScreen from './screens/FollowUpScreen'
 import HomeScreen from './screens/HomeScreen'
 import MapScreen from './screens/MapScreen'
+// ask permissions to send notification --GA
+import * as Permissions from 'expo-permissions'
+import { Notifications } from 'expo';
 
 // redux stuff 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -27,12 +30,49 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 const Stack = createStackNavigator()
 
 export default function App() {
+
+  // store token -- GA
+  const [pushToken, setPushToken] = useState('') 
+   ///check notification permission status, when app is opened this will make sure to ask permission (ios only, android doesn't need it) -- GA
+   useEffect(() => {
+    Permissions.getAsync(Permissions.NOTIFICATIONS).then(statusObj => {
+      
+        if(statusObj.status !== 'granted'){
+            return Permissions.askAsync(Permissions.NOTIFICATIONS)
+        }
+
+        return statusObj
+    }).then(statusObj => {
+        if(statusObj.status !== 'granted'){
+            throw new Error('Permission not granted!')
+        }
+    }).then(() => {
+      //getting push token from android and iso server --GA
+      return Notifications.getExpoPushTokenAsync()
+    }
+    ).then(response=> {
+   
+      const token = response
+      setPushToken(token)
+      //console.log('token', token)
+      // use expo push notification tool to test the token https://expo.io/notifications --GA
+      
+    })
+    .catch(err => {
+      return null
+    })
+}, [])
+
+
   return (
     <Provider store={store} >
       <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
+        {/*to pass down the pushToken props, changed the stack screen as following -- GA */}
+        <Stack.Navigator initialRouteName="Home" pushToken={pushToken}>
             {/* these are the routes */}
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Home" >
+                {props => <HomeScreen {...props} pushToken={pushToken} />}
+            </Stack.Screen>
             <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
             <Stack.Screen name="FollowUp" component={FollowUpScreen} />
             <Stack.Screen name="Map" component={MapScreen} />

@@ -55,12 +55,15 @@ const HomeScreen = props => {
         })
     }, [])
 
+
+
+    
     return (
         <View style={styles.main}>
             <Text>The HomeScreen</Text>
             <Text>Welcome to ___________</Text>
             {/* custom button component  */}
-            <BigMainButton  />
+            <BigMainButton  pushToken={props.pushToken}/>
             {/* i think these should probably be replaced by custom components to style + css up */}
             <Button 
                 title="See More Requests"
