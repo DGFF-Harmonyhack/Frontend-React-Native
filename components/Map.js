@@ -4,8 +4,9 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const Map = props => {
+  console.log('map');
     return (
-        <View>
+        <View style={styles.main}>
             <Text>The Map</Text>
             {/* just put a picture here until we figure it out  */}
         </View>
@@ -14,8 +15,11 @@ const Map = props => {
 
 const styles = StyleSheet.create({
     main: {
-        flex: 0.3
+      width: '80%',
+      borderColor: 'blue',
+      borderWidth: 2,
+      flexGrow: 1
     }
 })
 
-export default Map; 
+export default Map;
