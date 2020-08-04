@@ -1,6 +1,6 @@
 // the please record me button #1
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 // this is the import you need for navigation done outside of screens
 import { useNavigation } from '@react-navigation/native';
@@ -19,6 +19,28 @@ const BigMainButton = props => {
     // mimic the syntax and use navigation inside of a component
     const navigation = useNavigation();
 
+    // the reacting of users to notifications --GA
+    useEffect(() => { 
+        // how user interact with notification when app is not running -- GA
+        // will lead the user back to the app -- GA
+        const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
+            console.log(response)
+        })
+
+        // how user interact with notification when app is upfront running -- GA
+        const foregroundSubscription = Notifications.addNotificationReceivedListener(
+            (notification) => {
+                console.log(notification)
+            }
+            
+        )
+
+        return () => {
+            backgroundSubscription.remove()
+            foregroundSubscription.remove()
+        }
+    }, []
+    )
     // notification trigger function --GA
     const triggerNotificationHandler = () => {
         Notifications.scheduleNotificationAsync({
