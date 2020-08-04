@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 //Navigation stuff
@@ -19,6 +19,9 @@ import { Notifications } from 'expo';
 const Stack = createStackNavigator()
 
 export default function App() {
+
+  // store token -- GA
+  [pushToken, setPushToken] = useState('') 
    ///check notification permission status, when app is opened this will make sure to ask permission (ios only, android doesn't need it) -- GA
    useEffect(() => {
     Permissions.getAsync(Permissions.NOTIFICATIONS).then(statusObj => {
@@ -33,14 +36,15 @@ export default function App() {
             throw new Error('Permission not granted!')
         }
     }).then(() => {
-      //getting push token from android and iso server
+      //getting push token from android and iso server --GA
       return Notifications.getExpoPushTokenAsync()
     }
     ).then(response=> {
    
       const token = response
+      setPushToken(token)
       //console.log('token', token)
-      // use expo push notification tool to test the token
+      // use expo push notification tool to test the token https://expo.io/notifications --GA
       
     })
     .catch(err => {

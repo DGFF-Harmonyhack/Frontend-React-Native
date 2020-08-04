@@ -43,14 +43,30 @@ const BigMainButton = props => {
     )
     // notification trigger function --GA
     const triggerNotificationHandler = () => {
-        Notifications.scheduleNotificationAsync({
-            content: {
-                title: 'first local notification',
-                body: 'hello everybody'
+        // local notification  -- GA
+        // Notifications.scheduleNotificationAsync({
+        //     content: {
+        //         title: 'first local notification',
+        //         body: 'hello everybody'
+        //     },
+        //     trigger:{
+        //         seconds: 5
+        //     }
+        // })
+
+        // push notification -- GA
+        //https://exp.host/--/api/v2/push/send expo server -- GA
+        fetch('https://exp.host/--/api/v2/push/send', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Accept-Encoding': 'gzip, deflate',
+                'Content-Type': 'application/json'
             },
-            trigger:{
-                seconds: 5
-            }
+            body: JSON.stringify({
+                
+            })
+
         })
     }
     return (
