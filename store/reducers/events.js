@@ -14,7 +14,7 @@ const initialState ={
 const eventsReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_EVENTS: 
-            console.log("3 - the reducer", action.events[1].id)
+            // console.log("3 - the reducer", action.events[1].id)
             return { 
                 allEvents: action.events, 
                 // replace the user_id value with a state value of the user's id val 

@@ -13,7 +13,7 @@ export const fetchEvents = () => {
 
         const response = await fetch(`${BackendAddress.API}/events`)
         const responseData = await response.json()
-        console.log(" 1 - fetchEvents is triggered sample event id", responseData[1].id)
+        // console.log(" 1 - fetchEvents is triggered sample event id", responseData[1].id)
         dispatch({
             type: SET_EVENTS,
             events: responseData

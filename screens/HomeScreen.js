@@ -1,11 +1,9 @@
 // Obviously the home screen with the giant button and etc 
 import React, { useState, useEffect } from 'react';
 import { Button, View, Text, StyleSheet, Alert, FlatList } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 
 import BigMainButton from '../components/BigMainButton'
 import Form from '../components/Form'
-import BackendAddress from '../constants/BackendAddress'
 
 // redux stuff 
 import { useSelector, useDispatch } from 'react-redux'
@@ -23,48 +21,25 @@ const HomeScreen = props => {
 
     const [userData, setUserData] = useState()
 
+
     // redux testing 
     const allEvents = useSelector(state => state.events.allEvents)
     const savedEvents = useSelector(state => state.events.savedEvents) 
-    // console.log(" 2 - allEvents in HomeScreen, it is a useSelector this should be full of all the events if component did mount worked fine", allEvents[1].id)
-    // console.log(" 4 - savedEvents in HS", savedEvents[1].id)
-    // let savedEvents = useSelector(state => state.events.savedEvents)
-    // console.log(allEvents[1].id)
+
     const dispatch = useDispatch();
-    // const toggleSavedHandler = (eventId) => {
-    //     dispatch(toggleSaved(eventId))
-    // }
 
     // component did mount 
     useEffect(() => {
         dispatch(eventsActions.fetchEvents())
         // .then()
-        console.log(" 2 - allEvents in HomeScreen, it is a useSelector this should be full of all the events if component did mount worked fine", allEvents[1].id)
-        console.log(" 4 - savedEvents in HS", savedEvents[2].id)
+        // console.log(" 2 - allEvents in HomeScreen, it is a useSelector this should be full of all the events if component did mount worked fine", allEvents[1].id)
+        // console.log(" 4 - savedEvents in HS", savedEvents[1].id)
     }, [dispatch]);
 
 
-    // testing new event with redux-thunk / api call 
-    // let test_user_id = 128
-    // let test_location = "Test Location - with id as int"
-    // let test_description = "Test Description - with id as int"
 
-    // const testNewEvent = () => {
-    //     dispatch(eventsActions.createEvent(test_user_id, test_location, test_description))
-    // }
-        // check of local memory has any saved reqs
-        // just a placeholder value for listofsavedreqs
-        // setListOfSavedReqs({
-        //     1 : '1'
-        // })
-        //bc of initial load, check to see if there is new value so it doesn't loop forever from the change arg in useEffect
-        // if(!!isThereNewSave == true) {
-        //     setIsThereNewSave(false)
-        // }
-        // the watch condition to run the useEffect again is any change in the boolean isThereNewSave
-    // }, [isThereNewSave]);
 
-    
+
     ///check notification permission status -- GA
     useEffect(() => {
         Permissions.getAsync(Permissions.NOTIFICATIONS).then(statusObj => {
@@ -102,14 +77,8 @@ const HomeScreen = props => {
 
             
 
-            {/* redux testing  */}
+            {/* redux + componentDidMount testing  */}
 
-            {/* <View>
-                <Button 
-                    title="test new"
-                    onPress={testNewEvent}
-                />
-            </View> */}
             <Text>All Events</Text>
             <View style={styles.flatList}>
                 {allEvents.map((event) => (
