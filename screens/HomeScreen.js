@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Button, View, Text, StyleSheet } from 'react-native';
 import BigMainButton from '../components/BigMainButton'
 import Form from '../components/Form'
-// ask permissions to send notification --GA
-import * as Permissions from 'expo-permissions'
 
 const HomeScreen = props => {
     const { navigation } = props
@@ -26,27 +24,16 @@ const HomeScreen = props => {
         }
         // the watch condition to run the useEffect again is any change in the boolean isThereNewSave
     }, [isThereNewSave]);
-    ///check notification permission status -- GA
-    useEffect(() => {
-        Permissions.getAsync(Permissions.NOTIFICATIONS).then(statusObj => {
-            if(statusObj.status !== 'granted'){
-                return Permissions.askAsync(Permissions.NOTIFICATIONS)
-            }
 
-            return statusObj
-        }).then(statusObj => {
-            if(statusObj.status !== 'granted'){
-                return 
-            }
-        })
-    }, [])
-
+   
+   
+    // console.log(props.pushToken)
     return (
         <View style={styles.main}>
             <Text>The HomeScreen</Text>
             <Text>Welcome to ___________</Text>
             {/* custom button component  */}
-            <BigMainButton  />
+            <BigMainButton  pushToken={props.pushToken}/>
             {/* i think these should probably be replaced by custom components to style + css up */}
             <Button 
                 title="See More Requests"
