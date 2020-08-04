@@ -8,8 +8,8 @@ import Form from '../components/Form'
 import BackendAddress from '../constants/BackendAddress'
 
 // redux stuff 
-import { useSelector } from 'react-redux'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleEvents, toggleSaved } from '../store/actions/events'
 
 
 const HomeScreen = props => {
@@ -23,11 +23,11 @@ const HomeScreen = props => {
 
 
     // redux testing 
-
     let allEvents = useSelector(state => state.events.allEvents)
-    console.log(allEvents[1].id)
-    // const allEvents = useSelector(state => state.events.allEvents)
+    let savedEvents = useSelector(state => state.events.savedEvents)
     // console.log(allEvents[1].id)
+
+
 
     // the componentDidMount to load up local memory of saved reqs into the javascript memory
     // useEffect(() => {
@@ -77,6 +77,12 @@ const HomeScreen = props => {
     // })
 
 
+    // redux stuff 
+    const dispatch = useDispatch();
+    const toggleSavedHandler = (eventId) => {
+        dispatch(toggleSaved(eventId))
+    }
+
     return (
         <View style={styles.main}>
             <Text>The HomeScreen</Text>
@@ -100,36 +106,44 @@ const HomeScreen = props => {
 
 
             {/* redux testing  */}
+            <Text>All Events</Text>
             <View style={styles.flatList}>
                 {allEvents.map((event) => (
                     <View key={event.id}>
                         <Text>Event id: {event.id}</Text>
                         <Text>Event location: {event.location}</Text>
-                        <Text>Event resolved?: {event.resolved_stat}</Text>
+                        <Text>Event resolved?: {event.resolved_stat ? "YES" : "NO"}</Text>
                         <Text>Event description: {event.description}</Text>
                         <Text>Event user_id: {event.user_id}</Text>
                         <Text>Event created_at: {event.created_at}</Text>
                         <Text>Event updated_at: {event.updated_at}</Text>
+                        <Button 
+                            title="SAVE"
+                            onPress={toggleSavedHandler.bind(this, event.id)}
+                        />
                     </View>
                 ))}
-                {/* <FlatList 
-                    keyExtractor={(event, index) => index}
-                    data={allEvents}
-                    renderItem={event => (
-                        <View id={event.description}>
-                            <Text>Event id: {event.id}</Text>
-                            <Text>Event location: {event.location}</Text>
-                            <Text>Event resolved?: {event.resolved_stat}</Text>
-                            <Text>Event description: {event.description}</Text>
-                            <Text>Event user_id: {event.user_id}</Text>
-                            <Text>Event created_at: {event.created_at}</Text>
-                            <Text>Event updated_at: {event.updated_at}</Text>
-                        </View>
-                    )}
-                /> */}
             </View>
-            {/* id, location, resolved_stat, description, user_id, created_at, updated_at */}
+            <Text>Saved Events</Text>
+            <View  style={styles.flatList}>
+                {savedEvents.map((event) => (
+                    <View key={event.id}>
+                        <Text>Event id: {event.id}</Text>
+                        <Text>Event location: {event.location}</Text>
+                        <Text>Event resolved?: {event.resolved_stat ? "YES" : "NO"}</Text>
+                        <Text>Event description: {event.description}</Text>
+                        <Text>Event user_id: {event.user_id}</Text>
+                        <Text>Event created_at: {event.created_at}</Text>
+                        <Text>Event updated_at: {event.updated_at}</Text>
+                        <Button 
+                            title="SAVE"
+                            onPress={toggleSavedHandler.bind(this, event.id)}
+                        />
+                    </View>
+                ))}
+            </View>
             
+
         </View>
     )
 }
@@ -139,7 +153,7 @@ const styles = StyleSheet.create({
         flex: 0.3
     },
     flatList: {
-        height: 300
+        height: 200
     }
 })
 export default HomeScreen; 
