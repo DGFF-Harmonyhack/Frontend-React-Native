@@ -1,7 +1,5 @@
 // this is actually 4 + 5 but with conditional rendering for the "List of saved" component and button 
 
-
-
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 

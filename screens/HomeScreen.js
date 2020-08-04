@@ -1,7 +1,7 @@
 // Obviously the home screen with the giant button and etc 
 import React, { useState, useEffect } from 'react';
 import { Button, View, Text, StyleSheet, Alert } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-community/async-storage';
 
 import BigMainButton from '../components/BigMainButton'
 import Form from '../components/Form'
@@ -31,26 +31,33 @@ const HomeScreen = props => {
     }, [isThereNewSave]);
 
     useEffect(() => {
-        const userIdentificaiton = AsyncStorage.getItem('@user_id')
+        // just for now i'm using this specific user for testing 
+        const userIdentificaiton = AsyncStorage.setItem('@user_id', "120")
+        // const userIdentificaiton = AsyncStorage.getItem('@user_id')
+
         if (userIdentificaiton !== null) {
             fetch(`${BackendAddress.API}/users/${userIdentificaiton}`)
-            .then((response) => response.json())
-            .then((returnValue) => {
-                setUserData(returnValue)
+            .then((r) => r.json())
+            .then((responseData) => {
+                console.log(responseData)
+                setUserData(responseData)
                 // set the list of saved reqs 
             })
         } else {
             fetch(`${BackendAddress.API}/users`, {
-                method: 'POST',
+                method: 'post',
                 headers: {
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify()
+                body: JSON.stringify({})
             })
-            .then((response) => response.json())
-            .then((returnValue) => {
-                setUserData(returnValue) 
-                AsyncStroage.setItem('@user_id', returnValue.user_id)
+            .then((r) => r.json())
+            .then((responseData) => {
+                console.log(responseData)
+                setUserData(responseData)
+                // setUserData(JSON.stringify(responseData)) 
+                AsyncStorage.setItem('@user_id', responseData.user_id)
             })
             Alert.alert()
         }
