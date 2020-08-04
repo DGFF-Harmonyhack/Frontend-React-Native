@@ -10,6 +10,7 @@ import BackendAddress from '../constants/BackendAddress'
 // redux stuff 
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleEvents, toggleSaved } from '../store/actions/events'
+import * as eventsActions from '../store/actions/events'
 
 
 const HomeScreen = props => {
@@ -26,6 +27,14 @@ const HomeScreen = props => {
     let allEvents = useSelector(state => state.events.allEvents)
     let savedEvents = useSelector(state => state.events.savedEvents)
     // console.log(allEvents[1].id)
+    const dispatch = useDispatch();
+    const toggleSavedHandler = (eventId) => {
+        dispatch(toggleSaved(eventId))
+    }
+
+    useEffect(() => {
+        dispatch(eventsActions.fetchEvents())
+    }, [dispatch]);
 
 
 
@@ -76,11 +85,6 @@ const HomeScreen = props => {
     //     }
     // })
 
-    // redux stuff 
-    const dispatch = useDispatch();
-    const toggleSavedHandler = (eventId) => {
-        dispatch(toggleSaved(eventId))
-    }
 
     return (
         <View style={styles.main}>
