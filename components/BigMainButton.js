@@ -64,11 +64,15 @@ const BigMainButton = props => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                
+                to: props.pushToken,
+                title: 'Record me!',
+                body: 'Please record me, here is my address'
             })
 
         })
     }
+
+  
     return (
         <View style={styles.button}>
             <Text style={styles.textStyle}>The BigMainButton</Text>

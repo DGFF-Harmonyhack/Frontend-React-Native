@@ -21,7 +21,7 @@ const Stack = createStackNavigator()
 export default function App() {
 
   // store token -- GA
-  [pushToken, setPushToken] = useState('') 
+  const [pushToken, setPushToken] = useState('') 
    ///check notification permission status, when app is opened this will make sure to ask permission (ios only, android doesn't need it) -- GA
    useEffect(() => {
     Permissions.getAsync(Permissions.NOTIFICATIONS).then(statusObj => {
@@ -52,11 +52,16 @@ export default function App() {
     })
 }, [])
 
+
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Home" pushToken={pushToken}>
           {/* these are the routes */}
-          <Stack.Screen name="Home" component={HomeScreen} />
+          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+          {/*to pass down the pushToken props, changed the stack screen as following -- GA */}
+          <Stack.Screen name="Home">
+              {props => <HomeScreen {...props} pushToken={pushToken} />}
+          </Stack.Screen>
           <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
           <Stack.Screen name="FollowUp" component={FollowUpScreen} />
           <Stack.Screen name="Map" component={MapScreen} />
