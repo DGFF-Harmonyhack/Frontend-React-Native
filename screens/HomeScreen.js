@@ -76,7 +76,6 @@ const HomeScreen = props => {
     //     }
     // })
 
-
     // redux stuff 
     const dispatch = useDispatch();
     const toggleSavedHandler = (eventId) => {
@@ -147,6 +146,7 @@ const HomeScreen = props => {
         </View>
     )
 }
+
 // this is literally just here so we have a template to mess with when we google styling 
 const styles = StyleSheet.create({
     main: {

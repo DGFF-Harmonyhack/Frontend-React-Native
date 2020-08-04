@@ -12,15 +12,16 @@ import HomeScreen from './screens/HomeScreen'
 import MapScreen from './screens/MapScreen'
 
 // redux stuff 
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import eventsReducer from './store/reducers/events';
 import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
 // redux stuff 
 const rootReducer = combineReducers({
   events: eventsReducer
 })
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 
 const Stack = createStackNavigator()
