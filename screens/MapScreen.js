@@ -38,7 +38,11 @@ const MapScreen = props => {
           <Text>{event.details}</Text>
 
           {/* REspond button sends you to confirmation page. idk how to put it in the bottom corner */}
-          <Button title='Respond' onPress={()=>navigation.navigate("Confirmation")} color='green' />
+          <Button
+            title='Respond'
+            onPress={()=>navigation.navigate("Confirmation", { event })}
+            color='green'
+          />
         </View>
       </View>
     );
@@ -54,8 +58,7 @@ const styles = StyleSheet.create({
     height: '60%',
     width: '90%'
   },
-  eventRegion: {
-  },
+  eventRegion: {},
   detailsRegion: {
     height: '35%',
     borderColor: 'blue',
