@@ -32,7 +32,7 @@ const MapScreen = props => {
 
         {/* Details region. Grabs the selected event from state, renders details.*/}
         <View style={styles.detailsRegion}>
-          <Text>Details</Text>
+          <Text>Description</Text>
 
           {/* Assuming selecting an event on the map calls selectEvent hook, and sets a Details property. Here i assume it's just some text */}
           <Text>{event.details}</Text>

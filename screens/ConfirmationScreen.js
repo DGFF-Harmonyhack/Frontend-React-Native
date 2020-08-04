@@ -20,7 +20,7 @@ const ConfirmationScreen = ({ event }) => {
           <Text>Details</Text>
 
         {/* again, random assumption that event is an object with a description property that's a string. change when data structure gets fleshed out, */}
-          <Text>{/* event.description */}</Text>
+          <Text>{/* event.description */}Was this supposed to be a text input area?</Text>
         </View>
 
         <View>
