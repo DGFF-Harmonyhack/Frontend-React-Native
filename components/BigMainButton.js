@@ -6,6 +6,14 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications'
 
+// while app run upfront, the local notification will show --GA
+Notifications.setNotificationHandler({
+    handleNotification: async () => {
+        return {
+            shouldShowAlert: true
+        }
+    }
+})
 
 const BigMainButton = props => {
     // mimic the syntax and use navigation inside of a component
@@ -19,7 +27,7 @@ const BigMainButton = props => {
                 body: 'hello everybody'
             },
             trigger:{
-                seconds: 10
+                seconds: 5
             }
         })
     }

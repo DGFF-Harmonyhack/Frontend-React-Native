@@ -26,9 +26,11 @@ const HomeScreen = props => {
         }
         // the watch condition to run the useEffect again is any change in the boolean isThereNewSave
     }, [isThereNewSave]);
-    ///check notification permission status -- GA
+
+    ///check notification permission status, when app is opened this will make sure to ask permission -- GA
     useEffect(() => {
         Permissions.getAsync(Permissions.NOTIFICATIONS).then(statusObj => {
+            console.log(statusObj)
             if(statusObj.status !== 'granted'){
                 return Permissions.askAsync(Permissions.NOTIFICATIONS)
             }
