@@ -8,6 +8,8 @@ import Form from '../components/Form'
 // redux stuff 
 import { useSelector, useDispatch, createStoreHook } from 'react-redux'
 import * as eventsActions from '../store/actions/events'
+import * as userActions from '../store/actions/users'
+
 
 //asyncstorage, this is sqlite/persistence + localstorage + react-native
 import AsyncStorage from '@react-native-community/async-storage';
@@ -41,31 +43,56 @@ const HomeScreen = props => {
 
     const dispatch = useDispatch();
 
-    const getUser = async () => {
-        try {
-            const userId = await AsyncStorage.getItem('@user_id')
-            if (userId !== null) {
-                // userId is good! 
-                // trigger fetchEvents AFTER the userId is back so that savedEvents is properly filled out
-            } else {
-                // no userId, create new user instance and AsyncStorage it and .then  
-                // trigger fetchEvents AFTER the userId is back so that savedEvents is properly filled out
-            }
-        } catch(e) {
-            // error reading value 
-        }
-    };
+    // testing user_id
+    const userIdFromState = useSelector(state => state.users.user_id)
+
+    // const getUser = async () => {
+    //     try {
+    //         const userIdFromAsync = await AsyncStorage.getItem('@user_id')
+
+    //         if (userIdFromAsync !== null) {
+    //             // userId is good! 
+    //             // trigger fetchEvents AFTER the userId is back so that savedEvents is properly filled out
+    //             dispatch(userActions.setUser(userIdFromAsync))
+    //             // after this user_id can be pulled from state
+    //             // just use const userId = useSelector(state => state.users.user_id)
+                
+    //             // console.log("userId from Async", userIdFromAsync)
+    //             // console.log("users state", userIdFromState)
+    //             // console.log("user_id nested", userIdFromState.user_id)
+
+    //         } else {
+    //             // no userId, create new user instance and AsyncStorage it and .then  
+    //             // trigger fetchEvents AFTER the userId is back so that savedEvents is properly filled out
+
+    //             // dispatch(userActions.createUser()) 
+    //             // what is this going to return? 
+
+    //         }
+    //     } catch(e) {
+    //         // error reading value 
+    //     }
+    // };
 
     // component did mount 
     useEffect(() => {
-        // check asynstorage for user id and if it does not exist then create new user 
-        
-        dispatch(eventsActions.fetchEvents())
-        // .then()
-        // console.log("3 - allEvents in HomeScreen, it is a useSelector this should be full of all the events if component did mount worked fine", allEvents[1].id)
-        // console.log("4 - savedEvents in HS", savedEvents[1].id)
 
+        // check asynstorage for user id and if it does not exist then create new user 
+        dispatch(userActions.checkAndSaveUser())
+        // .then(
+        dispatch(eventsActions.fetchEvents())
+            // .then()
+            // console.log("3 - allEvents in HomeScreen, it is a useSelector this should be full of all the events if component did mount worked fine", allEvents[1].id)
+            // console.log("4 - savedEvents in HS", savedEvents[1].id)    
+        // )
     }, [dispatch]);
+
+    useEffect(() => {
+        // debug values here 
+        console.log("debug", userIdFromState)
+
+
+    })
 
 
     ///check notification permission status -- GA
@@ -82,6 +109,13 @@ const HomeScreen = props => {
     //         }
     //     })
     // }, [])
+
+
+
+    // test new 
+    const createNewHandler = () => {
+        dispatch(userActions.createUser())
+    }
 
 
 
@@ -106,8 +140,12 @@ const HomeScreen = props => {
             />
 
 
-            
+            <Button 
+                title="TEST NEW"
+                onPress={createNewHandler}
+            />
 
+        
             {/* redux + componentDidMount testing  */}
 
             <Text>All Events</Text>

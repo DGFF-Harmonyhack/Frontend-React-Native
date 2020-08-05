@@ -19,15 +19,17 @@ import { Notifications } from 'expo';
 // redux stuff 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import eventsReducer from './store/reducers/events';
+import usersReducer from './store/reducers/users'
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
 // redux stuff 
 const rootReducer = combineReducers({
-  events: eventsReducer
+  events: eventsReducer,
+  users: usersReducer
 })
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const Stack = createStackNavigator()
 
