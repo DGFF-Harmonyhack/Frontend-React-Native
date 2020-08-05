@@ -6,10 +6,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
+// Screen imports
 import ConfirmationScreen from './screens/ConfirmationScreen'
 import FollowUpScreen from './screens/FollowUpScreen'
 import HomeScreen from './screens/HomeScreen'
 import MapScreen from './screens/MapScreen'
+
 // ask permissions to send notification --GA
 import * as Permissions from 'expo-permissions'
 import { Notifications } from 'expo';

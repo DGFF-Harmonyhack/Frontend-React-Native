@@ -1,6 +1,5 @@
-export const TOGGLE_SAVED = 'TOGGLE_SAVED';
 export const CREATE_EVENT = 'CREATE_EVENT';
-export const SET_EVENTS = 'SET_EVENTS'
+export const SET_EVENTS = 'SET_EVENTS';
 
 import BackendAddress from '../../constants/BackendAddress'
 
@@ -13,17 +12,12 @@ export const fetchEvents = () => {
 
         const response = await fetch(`${BackendAddress.API}/events`)
         const responseData = await response.json()
-        // console.log(" 1 - fetchEvents is triggered sample event id", responseData[1].id)
+        // console.log(" 1 - fetchEvents is triggered sample event id", responseData[0])
+
         dispatch({
             type: SET_EVENTS,
             events: responseData
         })
-        // dispatch => {
-        //     dispatch({
-        //         type: SET_EVENTS, 
-        //         events: responseData
-        //     })
-        // }
 
 
         // can you double down on asyncs? or do i make another action and trigger it inside homescreen
@@ -51,21 +45,7 @@ export const createEvent = (user_id, location, description) => {
 
         dispatch({
             type: CREATE_EVENT,
-            eventData: responseData
+            events: responseData
         })
     }
-}
-
-// this.id = id,
-// this.location = location, 
-// this.resolved_stat = resolved_stat,
-// this.description = description,
-// this.user_id = user_id,
-// this.created_at = created_at,
-// this.updat
-
-
-
-export const toggleSaved = (id) => {
-    return { type: TOGGLE_SAVED, eventId: id }
 }
