@@ -1,35 +1,35 @@
-// TO DO 
+// TO DO
 
 // CONFIMRATION SCREEN NEEDS EVENT_ID maybe pull from currentEvent
-//  
+//
 // needs dispatch(responsesActions.createResponse())
 
-// see all responses to event 
+// see all responses to event
 
-// need another textInput for description 
-// drop down for response 
-// + useState 
+// need another textInput for description
+// drop down for response
+// + useState
 
-// 
+//
 
 
 
 // this is # 3, the confirmation screen
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
+import { Picker } from '@react-native-community/picker';
+import { useSelector, useDispatch } from 'react-redux';
 
-import Map from '../components/Map'
 
-const ConfirmationScreen = ({ event }) => {
+const ConfirmationScreen = props => {
+
+  [responseChoice, setResponseChoice] = useState('')
+
+
   return (
     <View style={styles.main}>
         <Text>The Confirmation Screen</Text>
-
-        {/* Render Map */}
-        <View style={styles.mapRegion}>
-          <Map />
-        </View>
 
         {/* SHow event details */}
         <View style={styles.detailsRegion}>
@@ -39,8 +39,33 @@ const ConfirmationScreen = ({ event }) => {
           <Text>{/* event.description */}Was this supposed to be a text input area?</Text>
         </View>
 
-        <View>
-          <Button title="is this supposed to be a bunch of button choices, or a dropdown, or what, i dont remember" />
+        <View style={styles.dropdown}>
+          <Picker
+            selectedValue={responseChoice}
+            style={styles.pickerText}
+            onValueChange={(itemValue, itemIndex) => setResponseChoice(itemValue)}
+          >
+            <Picker.Item
+              label='I have evidence.'
+              value='haveEvi'
+            />
+
+            <Picker.Item
+              label='I need evidence.'
+              value='needEvi'
+            />
+
+            <Picker.Item
+              label="I don't have evidence."
+              value='noEvi'
+            />
+
+            <Picker.Item
+              label='Other Response... See written response.'
+              value='other'
+            />
+          </Picker>
+
         </View>
 
     </View>
@@ -49,19 +74,15 @@ const ConfirmationScreen = ({ event }) => {
 
 const styles = StyleSheet.create({
     main: {},
-    mapRegion: {
-      alignItems: 'stretch',
-      justifyContent: 'flex-start',
-      height: '33%',
-      width: '90%'
-    },
+    dropdown: {},
     detailsRegion: {
       height: '33%',
       borderColor: 'blue',
       borderWidth: 1,
       width: '90%',
       marginTop: '4%',
-    }
+    },
+    pickerText: {}
 })
 
 export default ConfirmationScreen;

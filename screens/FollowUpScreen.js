@@ -1,26 +1,26 @@
-// TO DO 
+// TO DO
 // Submit needs to do an update dispatch for event resolved_stat + comment
-// Needs confirmation Modal 
+// Needs confirmation Modal
 // navigate to mapscreen instead onSubmit
 
-// in the diagram, this is #2, 
-// it will have all the follow up stuff for the person who pressed the button 
+// in the diagram, this is #2,
+// it will have all the follow up stuff for the person who pressed the button
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
-import * as eventsActions from '../store/actions/events'
-import { useSelector, useDispatch } from 'react-redux'
+import * as eventsActions from '../store/actions/events';
+import { useSelector, useDispatch } from 'react-redux';
 
 const FollowUpScreen = props => {
     const dispatch = useDispatch()
     const [descriptionField, setDescriptionField] = useState('')
     const [isResolved, setIsResolved] = useState(false)
-    
+
     const { navigation } = props
     const currentEvent = useSelector((state) => state.events.currentEvent)
 
     const submitHandler = () => {
-        // this will make an update, should probably send 
+        // this will make an update, should probably send
         // user id / user uuid / event id / resolved boolean based on which button / description
         // dispatch(eventsActions.updateEvent({ ...currentEvent, resolved_stat: isResolved, description: descriptionField }))
 
@@ -28,8 +28,8 @@ const FollowUpScreen = props => {
 
         // show modal confirm
 
-        // after modal confirmation 
-        // navigate to mapScreen instead 
+        // after modal confirmation
+        // navigate to mapScreen instead
         navigation.navigate("Home")
 
     }
@@ -41,25 +41,25 @@ const FollowUpScreen = props => {
     return (
         <View>
             <Text>The FollowUpScreen</Text>
-{/*             
-            i am safe button, manage state 
+{/*
+            i am safe button, manage state
 
-            i need evidence button, manage state 
+            i need evidence button, manage state
 
-            description field, manage state 
+            description field, manage state
 
-            submit button, update backend, validate if one of the buttons was pressed, preview modal maybe?  
+            submit button, update backend, validate if one of the buttons was pressed, preview modal maybe?
 */}
             <View>
                 <View>
-                    <Button 
+                    <Button
                         title="I AM SAFE"
                         onPress={resolutionStatusHandler.bind(this, "Safe")}
                         accessibilityLabel="I am safe"
                     />
                 </View>
                 <View>
-                    <Button 
+                    <Button
                         title="I NEED EVIDENCE"
                         onPress={resolutionStatusHandler.bind(this, "Help")}
                         accessibilityLabel="I need evidence"
@@ -79,8 +79,8 @@ const FollowUpScreen = props => {
                 />
             </View>
             <View>
-                <Button 
-                    title="Submit" 
+                <Button
+                    title="Submit"
                     onPress={submitHandler}
                     accessibilityLabel="Submit your follow up."
                 />
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default FollowUpScreen; 
+export default FollowUpScreen;
