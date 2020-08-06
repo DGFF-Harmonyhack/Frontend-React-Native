@@ -1,3 +1,10 @@
+// TO DO BISHES 
+// gena stuff (notifications)
+// styling 
+// 
+
+
+
 // Obviously the home screen with the giant button and etc 
 import React, { useState, useEffect } from 'react';
 import { Button, View, Text, StyleSheet, Alert, FlatList } from 'react-native';
@@ -9,6 +16,8 @@ import Form from '../components/Form'
 import { useSelector, useDispatch, createStoreHook } from 'react-redux'
 import * as eventsActions from '../store/actions/events'
 import * as userActions from '../store/actions/users'
+import * as responsesActions from '../store/actions/responses'
+
 //asyncstorage, this is sqlite/persistence + localstorage + react-native
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -37,10 +46,10 @@ const HomeScreen = props => {
 
     // redux testing 
     const allEvents = useSelector(state => state.events.allEvents)
+    // allEvents.sort((event) => { event.create_at })
     const savedEvents = useSelector(state => state.events.savedEvents) 
 
-    // USE THIS FOR USER_ID 
-    let userIdInRedux = useSelector(state => state.users.user_id)
+    const allResponses = useSelector(state => state.responses.allResponses)
 
     const dispatch = useDispatch();
 
@@ -80,11 +89,12 @@ const HomeScreen = props => {
         // console.log("pulled from state", userIdInRedux)
         readData()
         dispatch(eventsActions.fetchEvents())
+        dispatch(responsesActions.fetchResponses())
     }, [dispatch]);
 
     // debug useEffect
     // useEffect(() => {
-    //     console.log("Repeat HomeScreen useEffect", userIdInRedux)
+    //     // console.log("Repeat HomeScreen useEffect", allResponses[0], allResponses[1])
     //     // checkAsync()
     // })
 
@@ -108,7 +118,12 @@ const HomeScreen = props => {
 
     // test new 
     const createNewHandler = () => {
-        dispatch(userActions.createUser())
+        dispatch(responsesActions.createResponse(126, "sdfasdf", "asdfasdf", 222))
+
+        // user_id, 
+        // location, 
+        // description, 
+        // event_id
     }
 
 

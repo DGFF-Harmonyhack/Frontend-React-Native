@@ -1,3 +1,7 @@
+// to do. put G's fetch from expo pushToken into Redux
+// make the onPress go to next screen 
+// pull lot/lat data on submit 
+
 // the please record me button #1
 
 import React, { useEffect } from 'react';
@@ -79,11 +83,11 @@ const BigMainButton = props => {
             <Button 
                 title="Please Record Me!" 
                 // once follow up is loaded, we can async trigger database create
-                // onPress={() => navigation.navigate('FollowUp') 
+                onPress={() => navigation.navigate('FollowUp')}
                 
                 // bigmainbutton should trigger notification --GA
                //implement notification with onpress --GA
-               onPress={triggerNotificationHandler}
+            //    onPress={triggerNotificationHandler}
             />
         </View>
     )

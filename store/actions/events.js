@@ -1,3 +1,7 @@
+// change createEvent to include lot/lat instead of location
+// take out description on create 
+// updateEvent dispatch need to be made 
+
 export const CREATE_EVENT = 'CREATE_EVENT';
 export const SET_EVENTS = 'SET_EVENTS';
 
@@ -19,7 +23,6 @@ export const fetchEvents = () => {
     }
 }
 
-
 export const createEvent = (user_id, location, description) => {
     return async dispatch => {
         // any async code you want
@@ -40,6 +43,19 @@ export const createEvent = (user_id, location, description) => {
         dispatch({
             type: CREATE_EVENT,
             events: responseData
+        })
+    }
+}
+
+export const updateEvent = (user_id, event_id, description, resolved_stat) => {
+    return async dispatch => {
+        const response = await fetch('', {
+
+        })
+        const rData = await response.json()
+
+        dispatch({
+
         })
     }
 }

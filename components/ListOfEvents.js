@@ -1,3 +1,7 @@
+// TO DO 
+// if there are no saved events then just show a message instead 
+
+
 // the list that will show up on 5 at top 
 
 import React from 'react';

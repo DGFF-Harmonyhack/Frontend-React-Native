@@ -20,13 +20,15 @@ import { Notifications } from 'expo';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import eventsReducer from './store/reducers/events';
 import usersReducer from './store/reducers/users'
+import responsesReducer from './store/reducers/responses'
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
 // redux stuff 
 const rootReducer = combineReducers({
   events: eventsReducer,
-  users: usersReducer
+  users: usersReducer,
+  responses: responsesReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
