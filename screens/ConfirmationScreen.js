@@ -17,14 +17,15 @@
 // this is # 3, the confirmation screen
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { useSelector, useDispatch } from 'react-redux';
 
 
 const ConfirmationScreen = props => {
 
-  [responseChoice, setResponseChoice] = useState('')
+  [responseChoice, setResponseChoice] = useState('');
+  [inputResponse, setInput] = useState('');
 
 
   return (
@@ -36,7 +37,7 @@ const ConfirmationScreen = props => {
           <Text>Details</Text>
 
         {/* again, random assumption that event is an object with a description property that's a string. change when data structure gets fleshed out, */}
-          <Text>{/* event.description */}Was this supposed to be a text input area?</Text>
+          <Text>{/* event.description */}</Text>
         </View>
 
         <View style={styles.dropdown}>
@@ -65,7 +66,17 @@ const ConfirmationScreen = props => {
               value='other'
             />
           </Picker>
+        </View>
 
+        <View style={styles.textBoxArea}>
+          <TextInput
+            style={styles.textInput}
+            value={inputResponse}
+            onChangeText={text=>setInput(text)}
+            placeholder="Write your response info here!"
+            keyboardAppearance='dark'
+            multiline={true}
+          />
         </View>
 
     </View>
@@ -82,7 +93,13 @@ const styles = StyleSheet.create({
       width: '90%',
       marginTop: '4%',
     },
-    pickerText: {}
+    pickerText: {},
+    textInput: {
+      borderColor: 'blue',
+      borderWidth: 2,
+      height: '33%'
+    },
+    textBoxArea: {}
 })
 
 export default ConfirmationScreen;
