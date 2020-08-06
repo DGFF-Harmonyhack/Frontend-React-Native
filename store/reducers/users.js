@@ -12,7 +12,7 @@ const usersReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_USER: 
             // console.log("2 - the reducer", action.events[1])
-            console.log("reducers/users SET_USER", action.users)
+            // console.log("reducers/users SET_USER", action.users)
             return { 
                 user_id: action.users
             }

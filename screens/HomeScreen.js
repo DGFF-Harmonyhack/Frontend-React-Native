@@ -39,7 +39,7 @@ const HomeScreen = props => {
     const allEvents = useSelector(state => state.events.allEvents)
     const savedEvents = useSelector(state => state.events.savedEvents) 
 
-    // demo mvp fix for userId get
+    // USE THIS FOR USER_ID 
     let userIdInRedux = useSelector(state => state.users.user_id)
 
     const dispatch = useDispatch();
@@ -60,6 +60,8 @@ const HomeScreen = props => {
 
     const readData = async () => {
         try {
+            // if you want to check if making a new user works change 'user_id' below to something else
+            // the fact that getItem didn't work should trigger a new instance of user and save to state + asyncstorage 
             const userIdA = await AsyncStorage.getItem('user_id')
             if (userIdA !== null) {
                 // console.log("inside async AsyncStorage, should be userId", userIdA)
