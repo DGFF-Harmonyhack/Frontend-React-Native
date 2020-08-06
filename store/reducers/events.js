@@ -1,5 +1,8 @@
 // import { ActionSheetIOS } from 'react-native'
-import { SET_EVENTS } from '../actions/events'
+import { 
+    SET_EVENTS, 
+    CREATE_EVENT
+ } from '../actions/events'
 
 const initialState ={
     allEvents: [],
@@ -15,6 +18,14 @@ const eventsReducer = (state = initialState, action) => {
                 allEvents: action.events, 
                 // replace the user_id value with a state value of the user's id val 
                 savedEvents: action.events.filter((event) => event.user_id === 126)
+            }
+        case CREATE_EVENT: 
+            console.log("create_event action.events", action.events)
+            return {
+                ...state, 
+                allEvents: {
+                    ...state.allEvents, 
+                }
             }
         default: 
             return state; 

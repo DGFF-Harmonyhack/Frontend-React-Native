@@ -1,7 +1,7 @@
 import { 
     SET_USER, 
     CREATE_USER
-} from '../actions/events'
+} from '../actions/users'
 
 const initialState ={
     user_id: "initialUserId",
@@ -12,16 +12,13 @@ const usersReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_USER: 
             // console.log("2 - the reducer", action.events[1])
-            console.log("set user switch in reducers", action.user_id)
-
+            console.log("reducers/users SET_USER", action.users)
             return { 
-                user_id: action.user_id, 
-                // replace the user_id value with a state value of the user's id val 
+                user_id: action.users
             }
         default: 
             return state; 
     }
-    return state; 
 }
 
 export default usersReducer; 
