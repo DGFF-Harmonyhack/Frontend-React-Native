@@ -27,6 +27,9 @@ const ConfirmationScreen = props => {
   [responseChoice, setResponseChoice] = useState('');
   [inputResponse, setInput] = useState('');
 
+  const onSubmit = () => {
+    //call response action to create new response, using dropdown choice and text input and current user  and event id
+  }
 
   return (
     <View style={styles.main}>
@@ -79,13 +82,23 @@ const ConfirmationScreen = props => {
           />
         </View>
 
+        <View style={styles.submitButton}>
+          <Button
+            title="Submit Response"
+            onPress={onSubmit} />
+        </View>
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    main: {},
-    dropdown: {},
+    main: {
+      justifyContent: 'center'
+    },
+    dropdown: {
+      width: '75%'
+    },
     detailsRegion: {
       height: '33%',
       borderColor: 'blue',
@@ -99,7 +112,11 @@ const styles = StyleSheet.create({
       borderWidth: 2,
       height: '33%'
     },
-    textBoxArea: {}
+    textBoxArea: {},
+    submitButton: {
+      height: 50,
+      marginTop: 5
+    }
 })
 
 export default ConfirmationScreen;
