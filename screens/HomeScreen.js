@@ -21,6 +21,9 @@ import * as responsesActions from '../store/actions/responses'
 //asyncstorage, this is sqlite/persistence + localstorage + react-native
 import AsyncStorage from '@react-native-community/async-storage';
 
+import Colors from '../constants/Colors'
+
+
 
 // this is an example for storing strings, the most basic level but if you want to store objects go to docs, link below
 // const storeData = async (value) => {
@@ -228,7 +231,7 @@ const styles = StyleSheet.create({
     header: {
         alignItems: 'center',
         justifyContent: 'center', 
-        backgroundColor: 'grey', 
+        backgroundColor: Colors.gray, 
         margin: 10
     },
     headerText: {

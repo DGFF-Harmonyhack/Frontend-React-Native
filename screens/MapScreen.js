@@ -15,21 +15,24 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Button, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
 import * as eventsActions from '../store/actions/events'
 
-
 import Map from '../components/Map';
 import SearchBar from '../components/SearchBar'
 import ListOfEvents from '../components/ListOfEvents'
+
+import Colors from '../constants/Colors'
+
 
 const MapScreen = props => {
   const [event, selectEvent] = useState({});
   console.log('map screen');
 
   const dispatch = useDispatch()
+  const savedEvents = useSelector(state => state.events.savedEvents) 
   const currentEvent = useSelector((state) => state.events.currentEvent)
   const currentUserId = useSelector(state => state.users.user_id)
 
@@ -62,12 +65,13 @@ const MapScreen = props => {
           <Text>{event.details}</Text>
 
           {/* REspond button sends you to confirmation page. idk how to put it in the bottom corner */}
-          <Button
+         
+        </View>
+        <Button
             title='Respond'
             onPress={()=>navigation.navigate("Confirmation", { event })}
             color='green'
           />
-        </View>
       </View>
     );
 };
@@ -82,14 +86,16 @@ const styles = StyleSheet.create({
     height: '60%',
     width: '90%'
   },
-  eventRegion: {},
+  eventRegion: {
+
+  },
   detailsRegion: {
-    height: '35%',
-    borderColor: 'blue',
+    height:  Dimensions.get('window').height * 0.25,
+    borderColor: Colors.pale,
     borderWidth: 1,
     width: '90%',
     marginTop: '4%',
-    alignContent: 'space-between'
+    // alignContent: 'space-between'
   }
 });
 

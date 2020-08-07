@@ -15,6 +15,9 @@ import * as Notifications from 'expo-notifications'
 import { useSelector, useDispatch } from 'react-redux'
 import * as eventsActions from '../store/actions/events'
 
+import Colors from '../constants/Colors'
+
+
 
 // while app run upfront, the local notification will show --GA
 Notifications.setNotificationHandler({
@@ -144,7 +147,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         height: Dimensions.get('window').width * .7, 
         width: Dimensions.get('window').width * .7, 
-        backgroundColor: 'red'
+        backgroundColor: Colors.red
     }
 
     // textStyle: {

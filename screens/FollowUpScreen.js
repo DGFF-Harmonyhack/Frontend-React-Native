@@ -10,6 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, Dimensions, Modal, TouchableOpacity } from 'react-native';
 import * as eventsActions from '../store/actions/events';
 import { useSelector, useDispatch } from 'react-redux';
+import Colors from '../constants/Colors'
 
 // notification 
 import * as Notifications from 'expo-notifications'
@@ -212,7 +213,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'white', 
     }, 
     unSelected: {
-        backgroundColor: '#add8e6', 
+        backgroundColor: Colors.pale, 
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -258,13 +259,13 @@ const styles = StyleSheet.create({
     followUpScreenText: {
         fontSize: 30, 
         fontWeight: '700',
+        // backgroundColor: Colors.snow
         
     }, 
     submitButton: {
         height: Dimensions.get('window').height * 0.2,
         alignItems: "center",
         padding: 10, 
-
     }, 
     submitButtonText: {
         fontSize: 25, 
