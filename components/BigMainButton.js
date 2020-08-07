@@ -2,13 +2,16 @@
 // make the onPress go to next screen 
 // pull lot/lat data on submit 
 
+// change button component into touchableOpacity so we can change the text size inside
+
 // the please record me button #1
 
 import React, { useEffect } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Dimensions} from 'react-native';
 // this is the import you need for navigation done outside of screens
 import { useNavigation } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications'
+
 
 // while app run upfront, the local notification will show --GA
 Notifications.setNotificationHandler({
@@ -79,8 +82,9 @@ const BigMainButton = props => {
   
     return (
         <View style={styles.button}>
-            <Text style={styles.textStyle}>The BigMainButton</Text>
+            <View style={styles.textContainer}>
             <Button 
+           
                 title="Please Record Me!" 
                 // once follow up is loaded, we can async trigger database create
                 onPress={() => navigation.navigate('FollowUp')}
@@ -89,15 +93,26 @@ const BigMainButton = props => {
                //implement notification with onpress --GA
             //    onPress={triggerNotificationHandler}
             />
+            </View>
         </View>
     )
 }
 const styles = StyleSheet.create({
+    textContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: .5
+    }, 
     textStyle: {
-        textAlign: 'center'
+        flex: 1,
+        textAlign:'center',
+        justifyContent: 'center'
     },
     button: {
-        borderWidth: 5
+        borderWidth: 5, 
+        borderRadius: 400,
+        backgroundColor: 'red',
+        height: Dimensions.get('window').width ,
     }
 })
 export default BigMainButton; 

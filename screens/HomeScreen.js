@@ -118,12 +118,9 @@ const HomeScreen = props => {
 
     // test new 
     const createNewHandler = () => {
-        dispatch(responsesActions.createResponse(126, "sdfasdf", "asdfasdf", 222))
+        // user_id, has_evidence, comment, event_id
+        dispatch(responsesActions.createResponse(126, false, "asdfasdf", 222))
 
-        // user_id, 
-        // location, 
-        // description, 
-        // event_id
     }
 
 

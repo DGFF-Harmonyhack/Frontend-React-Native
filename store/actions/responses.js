@@ -17,9 +17,8 @@ export const fetchResponses = () => {
     }
 }
 
-
 // fill in the values needed ******
-export const createResponse = (user_id, location, description, event_id) => {
+export const createResponse = (user_id, has_evidence, comment, event_id) => {
     return async dispatch => {
         // any async code you want
         const response = await fetch(`${BackendAddress.API}/events`, {
@@ -29,8 +28,8 @@ export const createResponse = (user_id, location, description, event_id) => {
             }, 
             body: JSON.stringify({
                 user_id, 
-                location, 
-                description, 
+                has_evidence, 
+                comment, 
                 event_id
             })
         })
