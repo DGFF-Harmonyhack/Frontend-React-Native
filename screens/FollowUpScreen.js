@@ -69,7 +69,7 @@ const FollowUpScreen = props => {
 */}
             <View style={styles.buttonContainer}>
                 {/* <View style={styles.button}> */}
-                    <View style={[isSelectedSafeButton?styles.selected:styles.unSelected]} >
+                    <View style={[isSelectedSafeButton? styles.unSelected : styles.selected]} >
                         <Button 
                             title="I AM SAFE"
                             onPress={() => {buttonSelectorHelper("Safe")}}
@@ -80,7 +80,7 @@ const FollowUpScreen = props => {
                 {/* <View style={styles.button}> */}
                     {/* <View style={(selectedSafeButton ? styles.notSselected : styles.selected)} > */}
 
-                    <View style={[isSelectedEvidenceButton?styles.selected:styles.unSelected]} >
+                    <View style={[isSelectedEvidenceButton ? styles.unSelected : styles.selected]} >
                         <Button 
                             title="I NEED EVIDENCE"
                             onPress={() => {buttonSelectorHelper("Help")}}
@@ -110,15 +110,11 @@ const FollowUpScreen = props => {
 }
 
 const styles = StyleSheet.create({
-    selcted: {
-        // uh..... for some reason this is not showing but notSelected is showing
-        // width: '40%',
-        backgroundColor: 'blue', 
+    selected: {
+        // backgroundColor: 'white', 
     }, 
     unSelected: {
-        // backgroundColor: '#fff8dc',
-        // width: '40%',
-        backgroundColor: 'black', 
+        backgroundColor: '#add8e6', 
     },
     buttonContainer: {
         flexDirection: 'row',
