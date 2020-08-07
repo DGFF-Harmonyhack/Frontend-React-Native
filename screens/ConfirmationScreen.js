@@ -6,9 +6,9 @@
 
 // see all responses to event
 
-// need another textInput for description
-// drop down for response
-// + useState
+//X need another textInput for description
+//X drop down for response
+//X + useState
 
 //
 
@@ -19,17 +19,34 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
 import { Picker } from '@react-native-community/picker';
+
 import { useSelector, useDispatch } from 'react-redux';
+import * as eventsActions from '../store/actions/events'
+import * as userActions from '../store/actions/users'
+import * as responsesActions from '../store/actions/responses'
 
 
 const ConfirmationScreen = props => {
+  const dispatch = useDispatch();
 
   [responseChoice, setResponseChoice] = useState('');
   [inputResponse, setInput] = useState('');
 
-  const onSubmit = () => {
+  const allResponses = useSelector(state => state.responses.allResponses);
+  const currentUser = useSelector(state => state.users.user_id)
+
+  const submitEvent = () => {
     //call response action to create new response, using dropdown choice and text input and current user  and event id
-  }
+      // user_id, event_id, hasEvidence, description
+
+      // Temp fix with random user and event, and accomodating current inadequate schema
+      let fakeUser = 1 //CurrentUser will work when merged with DOms new PR, for now use fake one.
+      let fakeEvent = 2 //Once map screen can actually select an event, it will be accessible as props.event. Til then use fake.
+      let hasEvidence = true //THis will probably change with a schema refactor
+      let description = { responseChoice: inputResponse }
+
+    dispatch(responsesActions.createResponse(fakeUser, fakeEvent, hasEvidence, description.toString()))
+  };
 
   return (
     <KeyboardAvoidingView
@@ -43,7 +60,7 @@ const ConfirmationScreen = props => {
           <Text>Details</Text>
 
         {/* again, random assumption that event is an object with a description property that's a string. change when data structure gets fleshed out, */}
-          <Text>{/* event.description */}</Text>
+          <Text>{/* props.event.description */}</Text>
         </View>
 
         <View style={styles.dropdown}>
@@ -84,13 +101,16 @@ const ConfirmationScreen = props => {
           placeholder="Write your response info here!"
           keyboardAppearance='dark'
           multiline={true}
-          onSubmitEditing={Keyboard.dismiss}
+          onSubmitEditing={() => {
+            Keyboard.dismiss();
+            submitEvent();
+          }}
         />
 
         <View style={styles.submitButton}>
           <Button
             title="Submit Response"
-            onPress={onSubmit} />
+            onPress={submitEvent} />
         </View>
       </View>
 
