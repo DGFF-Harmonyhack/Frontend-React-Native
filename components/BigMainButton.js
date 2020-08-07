@@ -7,7 +7,7 @@
 // the please record me button #1
 
 import React, { useEffect } from 'react';
-import { View, Text, Button, StyleSheet, Dimensions} from 'react-native';
+import { View, Text, Button, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 // this is the import you need for navigation done outside of screens
 import { useNavigation } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications'
@@ -105,39 +105,58 @@ const BigMainButton = props => {
 
   
     return (
-        <View style={styles.button}>
-            <View style={styles.textContainer}>
-            <Button 
-           
+        <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Record Me!</Text>
+            </TouchableOpacity>
+            {/* <Button 
+            
                 title="Please Record Me!" 
                 // once follow up is loaded, we can async trigger database create
-//                 onPress={nextScreenHandler}
+                // onPress={nextScreenHandler}
                 // onPress={() => navigation.navigate('FollowUp')}  -- moved it
                 
                 // bigmainbutton should trigger push notification --GA
-               //implement notification with onpress --GA
-               onPress={triggerNotificationHandler}
-            />
-            </View>
+                //implement notification with onpress --GA
+                onPress={triggerNotificationHandler}
+            /> */}
         </View>
     )
 }
 const styles = StyleSheet.create({
-    textContainer: {
-        alignItems: 'center',
+    buttonContainer: {
+        flex: .5,
         justifyContent: 'center',
-        flex: .5
+        alignItems: 'center', 
+        margin: Dimensions.get('window').height * .1
     }, 
-    textStyle: {
-        flex: 1,
-        textAlign:'center',
-        justifyContent: 'center'
-    },
+    buttonText: {
+        alignItems: 'center', 
+        fontSize: 50, 
+        // color: 'blue'
+    }, 
     button: {
-        borderWidth: 5, 
-        borderRadius: 400,
-        backgroundColor: 'red',
-        height: Dimensions.get('window').width ,
+        alignItems: 'center', 
+        padding: 10, 
+        borderRadius: 500,
+        borderWidth:1,
+        alignItems:'center',
+        justifyContent:'center',
+        height: Dimensions.get('window').width * .7, 
+        width: Dimensions.get('window').width * .7, 
+        backgroundColor: 'red'
     }
+
+    // textStyle: {
+    //     flex: 1,
+    //     textAlign:'center',
+    //     justifyContent: 'center'
+    // },
+    // button: {
+    //     borderWidth: 5, 
+    //     borderRadius: 400,
+    //     backgroundColor: 'red',
+    //     height: Dimensions.get('window').width ,
+    // }, 
 })
 export default BigMainButton; 

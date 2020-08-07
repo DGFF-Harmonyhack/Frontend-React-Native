@@ -157,17 +157,19 @@ const HomeScreen = props => {
             {/* custom button component  */}
             <BigMainButton  pushToken={props.pushToken}/>
             {/* i think these should probably be replaced by custom components to style + css up */}
-            <Button
-                title="See More Requests"
-                onPress={() => navigation.navigate('Map')}
-            />
-            {/* this is how you pass down props, second arg  */}
-            <Button
-                title="See Saved Requests"
-                onPress={() => navigation.navigate('Map', {
-                    listOfSavedReqs: listOfSavedReqs
-                })}
-            />
+            <View>
+                <Button
+                    title="See More Requests"
+                    onPress={() => navigation.navigate('Map')}
+                />
+                {/* this is how you pass down props, second arg  */}
+                <Button
+                    title="See Saved Requests"
+                    onPress={() => navigation.navigate('Map', {
+                        listOfSavedReqs: listOfSavedReqs
+                    })}
+                />
+            </View>
 
 
             {/* <Button
@@ -216,8 +218,9 @@ const HomeScreen = props => {
 // this is literally just here so we have a template to mess with when we google styling
 const styles = StyleSheet.create({
     main: {
-        flex: 0.3, 
-        margin: 5
+        flex: 1, 
+        margin: 5, 
+        
     },
     flatList: {
         height: 200

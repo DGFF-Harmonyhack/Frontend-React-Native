@@ -7,7 +7,7 @@
 // it will have all the follow up stuff for the person who pressed the button
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, TextInput, Dimensions, Modal } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, Dimensions, Modal, TouchableOpacity } from 'react-native';
 import * as eventsActions from '../store/actions/events';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -124,12 +124,19 @@ const FollowUpScreen = props => {
                     visible={confirmationModal}
                 >
                     <View style={styles.modalContentContainer}>
-                        <Text>Is this correct? </Text>
+                        <View style={styles.modalTextContainer}>
+                            <Text style={styles.modalScreenText}>Is this correct? </Text>
+                        </View>
                         <View>
-                            <Text>Description:</Text>
-                            <Text>{descriptionField}</Text>
-                            <Text>STATUS</Text>
-                            <Text>{isSelectedSafeButton? "Safe": "Need Evidence"}</Text>
+                            <View style={styles.modalHeaderContainer}>
+                                <Text style={styles.descriptionHeader}>Description</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.descriptionText}>{descriptionField}</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.descriptionText}>{isSelectedSafeButton? "I am safe!": "I need evidence!"}</Text>
+                            </View>
                         </View>
                     </View>
                     <View style={styles.modalButtonContainer}>
@@ -147,6 +154,13 @@ const FollowUpScreen = props => {
                         </View>
                     </View>
                 </Modal>
+            </View>
+
+
+            <View style={styles.textContainer}>
+                <Text style={styles.followUpScreenText}>
+                    FOLLOW UP SCREEN TEXT
+                </Text>
             </View>
             <View style={styles.buttonContainer}>
                 <View style={[isSelectedSafeButton? styles.unSelected : styles.selected]} >
@@ -167,6 +181,8 @@ const FollowUpScreen = props => {
             <View>
                 <TextInput
                     {...props}
+                    multiline 
+                    numberOfLines={20}
                     style={styles.inputBox}
                     onChangeText={text => setDescriptionField(text)}
                     value={descriptionField}
@@ -174,11 +190,18 @@ const FollowUpScreen = props => {
                 />
             </View>
             <View>
-                <Button 
+                {/* <Button 
+                    style={styles.submitButton}
                     title="Submit" 
                     onPress={() => {setConfirmationModal(true)}}
                     accessibilityLabel="Submit your follow up."
-                />
+                /> */}
+                <TouchableOpacity 
+                    style={styles.submitButton}
+                    onPress={() => {setConfirmationModal(true)}}
+                >
+                    <Text style={styles.submitButtonText}>Submit</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -194,7 +217,8 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '80%'
+        width: '80%', 
+        marginBottom: Dimensions.get('window').height * 0.05
     },
     main: {
         flex: 1,
@@ -206,7 +230,7 @@ const styles = StyleSheet.create({
         borderWidth: 1, 
         padding: 10,
         width: '80%', 
-        marginBottom: 10, 
+        marginBottom: Dimensions.get('window').height * 0.05, 
         // this is the height value 
         height: Dimensions.get('window').height * 0.3, 
         // this is the width value 
@@ -225,6 +249,53 @@ const styles = StyleSheet.create({
     },
     modalButton: {
         margin: 30,
+    }, 
+    textContainer: {
+        alignItems: 'center',
+        justifyContent: 'center', 
+        marginBottom: Dimensions.get('window').height * 0.07
+    }, 
+    followUpScreenText: {
+        fontSize: 30, 
+        fontWeight: '700',
+        
+    }, 
+    submitButton: {
+        height: Dimensions.get('window').height * 0.2,
+        alignItems: "center",
+        padding: 10, 
+
+    }, 
+    submitButtonText: {
+        fontSize: 25, 
+
+    },
+    modalTextContainer: {
+        alignItems: 'center',
+        justifyContent: 'center', 
+        marginBottom: Dimensions.get('window').height * 0.07
+    }, 
+    modalScreenText: {
+        fontSize: 30, 
+        fontWeight: '700',
+        
+    }, 
+    modalHeaderContainer: {
+        alignItems: 'center',
+        justifyContent: 'center', 
+        marginBottom: Dimensions.get('window').height * 0.01, 
+        borderWidth: 1, 
+        borderColor: 'white',
+        borderBottomColor: 'black'
+    },
+    descriptionHeader: {
+        fontSize: 22, 
+        fontWeight: '400',
+
+    }, 
+    descriptionText: {
+        fontSize: 18, 
+
     }
 })
 
