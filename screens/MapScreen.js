@@ -1,10 +1,10 @@
-// TO DO 
+// TO DO
 // description field should take in info / change based on marker selected
 
 // FIGURE OUT IF MAP CAN GIVE LOT / LAT RANGE built in if NOT do below
 // to filter the allEvents if (minLong <= event.long && maxLong >= event.long && ___ && ___ ) {return event}
 
-// need to show list of saved events if the button "see saved events" was pressed 
+// need to show list of saved events if the button "see saved events" was pressed
 
 // if click on marker or list item, show description then button to navigate to CONFIRMATION SCREEN
 
@@ -27,7 +27,6 @@ import ListOfEvents from '../components/ListOfEvents'
 
 const MapScreen = props => {
   const [event, selectEvent] = useState({});
-  console.log('map screen');
 
   const dispatch = useDispatch()
   const currentEvent = useSelector((state) => state.events.currentEvent)

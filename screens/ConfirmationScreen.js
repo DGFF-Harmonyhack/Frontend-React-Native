@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     detailsRegion: {
       height: '33%',
       borderColor: 'blue',
-      borderWidth: 1,
+      borderWidth: 2,
       width: '90%',
       marginTop: '4%',
     },
@@ -153,7 +153,10 @@ const styles = StyleSheet.create({
     },
     responseType: {},
     responseDetail: {},
-    responseListItem: {}
+    responseListItem: {
+      marginTop: 15,
+      borderWidth: 1
+    }
 })
 
 export default ConfirmationScreen;

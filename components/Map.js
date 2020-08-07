@@ -1,9 +1,9 @@
-// TO DO 
+// TO DO
 //
 // MARKER FIX
-// SIZE FIX 
-// HELPER FUNCTION TO ACTUALLY FIND LOT LAT 
-// 
+// SIZE FIX
+// HELPER FUNCTION TO ACTUALLY FIND LOT LAT
+//
 
 
 // the map for 3/4/5
@@ -13,10 +13,9 @@ import MapView from 'react-native-maps';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 
 const Map = props => {
-  console.log('map');
     return (
         <View style={styles.container}>
-          <MapView style={styles.mapStyle} 
+          <MapView style={styles.mapStyle}
             showsUserLocation
             initialRegion = {{
               latitude:40.78825,
@@ -31,7 +30,7 @@ const Map = props => {
             description= {"lolz"}
           />
           </MapView>
-        </View>    
+        </View>
   )
 }
 

@@ -1,4 +1,4 @@
-// NEVER MIND GIVE UP WE NEED DEMO MVP 
+// NEVER MIND GIVE UP WE NEED DEMO MVP
 
 // search params basically, 4/5
 
@@ -6,7 +6,6 @@ import React from 'react';
 import { View, TextInput, StyleSheet, Button } from 'react-native';
 
 const SearchBar = props => {
-  console.log('searchbar');
     return (
         <View style={styles.main}>
             <TextInput placeholder='Type an event search in here' />
