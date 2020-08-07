@@ -151,8 +151,9 @@ const HomeScreen = props => {
 
     return (
         <View style={styles.main}>
-            <Text>The HomeScreen</Text>
-            <Text>Welcome to ___________</Text>
+            <View style={styles.header}>
+                <Text style={styles.headerText}>APP HEADER</Text>
+            </View>
             {/* custom button component  */}
             <BigMainButton  pushToken={props.pushToken}/>
             {/* i think these should probably be replaced by custom components to style + css up */}
@@ -169,15 +170,15 @@ const HomeScreen = props => {
             />
 
 
-            <Button
+            {/* <Button
                 title="TEST NEW"
                 onPress={createNewHandler}
-            />
+            /> */}
 
 
             {/* redux + componentDidMount testing  */}
 
-            <Text>All Responses</Text>
+            {/* <Text>All Responses</Text>
             <View style={styles.flatList}>
                 {allResponses.map((response) => (
                     <View key={response.id}>
@@ -205,7 +206,7 @@ const HomeScreen = props => {
                         <Text>Event updated_at: {event.updated_at}</Text>
                     </View>
                 ))}
-            </View>
+            </View> */}
 
 
         </View>
@@ -215,10 +216,21 @@ const HomeScreen = props => {
 // this is literally just here so we have a template to mess with when we google styling
 const styles = StyleSheet.create({
     main: {
-        flex: 0.3
+        flex: 0.3, 
+        margin: 5
     },
     flatList: {
         height: 200
+    }, 
+    header: {
+        alignItems: 'center',
+        justifyContent: 'center', 
+        backgroundColor: 'grey', 
+        margin: 10
+    },
+    headerText: {
+        fontSize: 30, 
+        fontWeight: '700', 
     }
 });
 export default HomeScreen;
