@@ -6,15 +6,32 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
+// Screen imports
 import ConfirmationScreen from './screens/ConfirmationScreen'
 import FollowUpScreen from './screens/FollowUpScreen'
 import HomeScreen from './screens/HomeScreen'
 import MapScreen from './screens/MapScreen'
+
 // ask permissions to send notification --GA
 import * as Permissions from 'expo-permissions'
 import { Notifications } from 'expo';
 
+// redux stuff 
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import eventsReducer from './store/reducers/events';
+import usersReducer from './store/reducers/users'
+import responsesReducer from './store/reducers/responses'
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
+// redux stuff 
+const rootReducer = combineReducers({
+  events: eventsReducer,
+  users: usersReducer,
+  responses: responsesReducer
+})
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const Stack = createStackNavigator()
 
@@ -55,19 +72,20 @@ export default function App() {
 
 
   return (
-    <NavigationContainer>
+    <Provider store={store} >
+      <NavigationContainer>
+        {/*to pass down the pushToken props, changed the stack screen as following -- GA */}
         <Stack.Navigator initialRouteName="Home" pushToken={pushToken}>
-          {/* these are the routes */}
-          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-          {/*to pass down the pushToken props, changed the stack screen as following -- GA */}
-          <Stack.Screen name="Home">
-              {props => <HomeScreen {...props} pushToken={pushToken} />}
-          </Stack.Screen>
-          <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
-          <Stack.Screen name="FollowUp" component={FollowUpScreen} />
-          <Stack.Screen name="Map" component={MapScreen} />
-        </Stack.Navigator>
-    </NavigationContainer>
+            {/* these are the routes */}
+            <Stack.Screen name="Home" >
+                {props => <HomeScreen {...props} pushToken={pushToken} />}
+            </Stack.Screen>
+            <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
+            <Stack.Screen name="FollowUp" component={FollowUpScreen} />
+            <Stack.Screen name="Map" component={MapScreen} />
+          </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

@@ -1,3 +1,19 @@
+// TO DO 
+
+// CONFIMRATION SCREEN NEEDS EVENT_ID maybe pull from currentEvent
+//  
+// needs dispatch(responsesActions.createResponse())
+
+// see all responses to event 
+
+// need another textInput for description 
+// drop down for response 
+// + useState 
+
+// 
+
+
+
 // this is # 3, the confirmation screen
 
 import React from 'react';

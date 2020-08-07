@@ -1,3 +1,5 @@
+// NEVER MIND GIVE UP WE NEED DEMO MVP 
+
 // search params basically, 4/5
 
 import React from 'react';

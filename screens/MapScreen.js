@@ -1,4 +1,18 @@
+// TO DO 
+// description field should take in info / change based on marker selected
+
+// FIGURE OUT IF MAP CAN GIVE LOT / LAT RANGE built in if NOT do below
+// to filter the allEvents if (minLong <= event.long && maxLong >= event.long && ___ && ___ ) {return event}
+
+// need to show list of saved events if the button "see saved events" was pressed 
+
+// if click on marker or list item, show description then button to navigate to CONFIRMATION SCREEN
+
+
+
+
 // this is actually 4 + 5 but with conditional rendering for the "List of saved" component and button
+
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
