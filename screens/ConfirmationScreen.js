@@ -17,7 +17,7 @@
 // this is # 3, the confirmation screen
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -32,7 +32,10 @@ const ConfirmationScreen = props => {
   }
 
   return (
-    <View style={styles.main}>
+    <KeyboardAvoidingView
+       style={styles.main}
+       behavior={Platform.OS == "ios" ? "padding" : "height"}
+     >
         <Text>The Confirmation Screen</Text>
 
         {/* SHow event details */}
@@ -65,30 +68,34 @@ const ConfirmationScreen = props => {
             />
 
             <Picker.Item
-              label='Other Response... See written response.'
+              label='Other... See written response.'
               value='other'
             />
           </Picker>
         </View>
 
-        <View style={styles.textBoxArea}>
-          <TextInput
-            style={styles.textInput}
-            value={inputResponse}
-            onChangeText={text=>setInput(text)}
-            placeholder="Write your response info here!"
-            keyboardAppearance='dark'
-            multiline={true}
-          />
-        </View>
+      <View
+        style={styles.textBoxArea}
+      >
+        <TextInput
+          style={styles.textInput}
+          value={inputResponse}
+          onChangeText={text=>setInput(text)}
+          placeholder="Write your response info here!"
+          keyboardAppearance='dark'
+          multiline={true}
+          onSubmitEditing={Keyboard.dismiss}
+        />
 
         <View style={styles.submitButton}>
           <Button
             title="Submit Response"
             onPress={onSubmit} />
         </View>
+      </View>
 
-    </View>
+    </KeyboardAvoidingView
+    >
   );
 };
 
