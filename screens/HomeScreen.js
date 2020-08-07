@@ -1,18 +1,18 @@
-// TO DO BISHES 
+// TO DO BISHES
 // gena stuff (notifications)
-// styling 
-// 
+// styling
+//
 
 
 
-// Obviously the home screen with the giant button and etc 
+// Obviously the home screen with the giant button and etc
 import React, { useState, useEffect } from 'react';
 import { Button, View, Text, StyleSheet, Alert, FlatList } from 'react-native';
 
 import BigMainButton from '../components/BigMainButton'
 import Form from '../components/Form'
 
-// redux stuff 
+// redux stuff
 import { useSelector, useDispatch, createStoreHook } from 'react-redux'
 import * as eventsActions from '../store/actions/events'
 import * as userActions from '../store/actions/users'
@@ -38,11 +38,11 @@ import * as Permissions from 'expo-permissions'
 
 
 const HomeScreen = props => {
-    const { navigation } = props
+    const { navigation } = props;
     // js memory for saved reqs
-    const [listOfSavedReqs, setListOfSavedReqs] = useState('')
-    // boolean switch to see if setListOfSavedReqs needs to be run 
-    const [isThereNewSave, setIsThereNewSave] = useState(false)
+    const [listOfSavedReqs, setListOfSavedReqs] = useState('');
+    // boolean switch to see if setListOfSavedReqs needs to be run
+    const [isThereNewSave, setIsThereNewSave] = useState(false);
 
     // redux testing 
     const currentUserId = useSelector(state => state.users.user_id)
@@ -52,7 +52,7 @@ const HomeScreen = props => {
     const currentEvent = useSelector(state => state.events.currentEvent)
 
     const allResponses = useSelector(state => state.responses.allResponses)
-    
+
 
     const dispatch = useDispatch();
 
@@ -85,7 +85,7 @@ const HomeScreen = props => {
     const readData = async () => {
         try {
             // if you want to check if making a new user works change 'user_id' below to something else
-            // the fact that getItem didn't work should trigger a new instance of user and save to state + asyncstorage 
+            // the fact that getItem didn't work should trigger a new instance of user and save to state + asyncstorage
             const userIdA = await AsyncStorage.getItem('user_id')
             if (userIdA !== null) {
                 // console.log("inside async AsyncStorage, should be userId", userIdA)
@@ -96,10 +96,10 @@ const HomeScreen = props => {
             }
         } catch (error) {
             console.log("getItem error", error)
-        }
-    }
+        };
+    };
 
-    // component did mount 
+    // component did mount
     useEffect(() => {
         // changeDummyAsyncId()
         // console.log("pulled from state", userIdInRedux)
@@ -128,10 +128,10 @@ const HomeScreen = props => {
             return statusObj
         }).then(statusObj => {
             if(statusObj.status !== 'granted'){
-                return 
+                return
             }
-        })
-    }, [])
+        });
+    }, []);
 
 
 
@@ -149,7 +149,6 @@ const HomeScreen = props => {
 
 
 
-    
     return (
         <View style={styles.main}>
             <Text>The HomeScreen</Text>
@@ -157,7 +156,7 @@ const HomeScreen = props => {
             {/* custom button component  */}
             <BigMainButton  pushToken={props.pushToken}/>
             {/* i think these should probably be replaced by custom components to style + css up */}
-            <Button 
+            <Button
                 title="See More Requests"
                 onPress={() => navigation.navigate('Map')}
             />
@@ -170,12 +169,12 @@ const HomeScreen = props => {
             />
 
 
-            <Button 
+            <Button
                 title="TEST NEW"
                 onPress={createNewHandler}
             />
 
-        
+
             {/* redux + componentDidMount testing  */}
 
             <Text>All Responses</Text>
@@ -207,13 +206,13 @@ const HomeScreen = props => {
                     </View>
                 ))}
             </View>
-            
+
 
         </View>
-    )
-}
+    );
+};
 
-// this is literally just here so we have a template to mess with when we google styling 
+// this is literally just here so we have a template to mess with when we google styling
 const styles = StyleSheet.create({
     main: {
         flex: 0.3
@@ -221,5 +220,5 @@ const styles = StyleSheet.create({
     flatList: {
         height: 200
     }
-})
-export default HomeScreen; 
+});
+export default HomeScreen;

@@ -73,8 +73,11 @@ const BigMainButton = props => {
         //     }
         // })
 
+        // navigate to next page -- GA
+        navigation.navigate('FollowUp')
         // push notification -- GA
         //https://exp.host/--/api/v2/push/send expo server -- GA
+        
         fetch('https://exp.host/--/api/v2/push/send', {
             method: 'POST',
             headers: {
@@ -89,6 +92,7 @@ const BigMainButton = props => {
             })
 
         })
+      nextScreenHandler();
     }
 
     const nextScreenHandler = () => {
@@ -107,11 +111,12 @@ const BigMainButton = props => {
            
                 title="Please Record Me!" 
                 // once follow up is loaded, we can async trigger database create
-                onPress={nextScreenHandler}
+//                 onPress={nextScreenHandler}
+                // onPress={() => navigation.navigate('FollowUp')}  -- moved it
                 
-                // bigmainbutton should trigger notification --GA
+                // bigmainbutton should trigger push notification --GA
                //implement notification with onpress --GA
-            //    onPress={triggerNotificationHandler}
+               onPress={triggerNotificationHandler}
             />
             </View>
         </View>

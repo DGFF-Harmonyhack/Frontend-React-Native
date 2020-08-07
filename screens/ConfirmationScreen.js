@@ -1,72 +1,131 @@
-// TO DO 
+// TO DO
 
 // CONFIMRATION SCREEN NEEDS EVENT_ID maybe pull from currentEvent
-//  
-// needs dispatch(responsesActions.createResponse())
+//
+//X needs dispatch(responsesActions.createResponse())
 
-// see all responses to event 
+// see all responses to event
 
-// need another textInput for description 
-// drop down for response 
-// + useState 
-
-
-// 
-
+//X need another textInput for description
+//X drop down for response
+//X + useState
 
 
 // this is # 3, the confirmation screen
 
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 
-import Map from '../components/Map'
-import { useSelector, useDispatch } from 'react-redux'
+
+import { useSelector, useDispatch } from 'react-redux';
+import * as eventsActions from '../store/actions/events'
+import * as userActions from '../store/actions/users'
 import * as responsesActions from '../store/actions/responses'
 
 
-const ConfirmationScreen = ({ event }) => {
-  const currentEvent = useSelector(state => state.events.currentEvent)
-  const currentUserId = useSelector(state => state.users.user_id)
-
+const ConfirmationScreen = props => {
   const dispatch = useDispatch();
-  // still need a variable to show all related responses? 
 
-  // use dispatch(responsesActions.createResponse(user_id, has_evidence, comment, event_id))
+  [responseChoice, setResponseChoice] = useState('');
+  [inputResponse, setInput] = useState('');
 
+  const allResponses = useSelector(state => state.responses.allResponses);
+  const currentUser = useSelector(state => state.users.user_id)
+
+  const submitEvent = () => {
+    //call response action to create new response, using dropdown choice and text input and current user  and event id
+      // user_id, event_id, hasEvidence, description
+
+      // Temp fix with random user and event, and accomodating current inadequate schema
+      let fakeUser = 1 // CurrentUser will work when merged with DOms new PR, for now use fake one.
+      let fakeEvent = 2 // Once map screen can actually select an event, it will be accessible as props.event. Til then use fake.
+      let hasEvidence = true // THis will probably change with a schema refactor
+      let description = { responseChoice: inputResponse }
+
+    dispatch(responsesActions.createResponse(fakeUser, fakeEvent, hasEvidence, description.toString()))
+  };
 
   return (
-    <View style={styles.main}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <KeyboardAvoidingView
+       style={styles.main}
+       behavior={Platform.OS == "ios" ? "padding" : "height"}
+     >
         <Text>The Confirmation Screen</Text>
-
-        {/* Render Map */}
-        <View style={styles.mapRegion}>
-          <Map />
-        </View>
 
         {/* SHow event details */}
         <View style={styles.detailsRegion}>
           <Text>Details</Text>
 
         {/* again, random assumption that event is an object with a description property that's a string. change when data structure gets fleshed out, */}
-          <Text>{/* event.description */}Was this supposed to be a text input area?</Text>
+          <Text>{/* props.event.description */}</Text>
         </View>
 
-        <View>
-          <Button title="is this supposed to be a bunch of button choices, or a dropdown, or what, i dont remember" />
+        <View style={styles.dropdown}>
+          <Picker
+            selectedValue={responseChoice}
+            style={styles.pickerText}
+            onValueChange={(itemValue, itemIndex) => setResponseChoice(itemValue)}
+          >
+            <Picker.Item
+              label='I have evidence.'
+              value='haveEvi'
+            />
+
+            <Picker.Item
+              label='I need evidence.'
+              value='needEvi'
+            />
+
+            <Picker.Item
+              label="I don't have evidence."
+              value='noEvi'
+            />
+
+            <Picker.Item
+              label='Other... See written response.'
+              value='other'
+            />
+          </Picker>
         </View>
 
-    </View>
+      <View
+        style={styles.textBoxArea}
+      >
+        <TextInput
+          style={styles.textInput}
+          value={inputResponse}
+          onChangeText={text=>setInput(text)}
+          placeholder="Write your response info here!"
+          keyboardAppearance='dark'
+          multiline={true}
+          onSubmitEditing={() => {
+            Keyboard.dismiss();
+            submitEvent();
+          }}
+          selectTextOnFocus={true}
+        />
+
+        <View style={styles.submitButton}>
+          <Button
+            title="Submit Response"
+            onPress={submitEvent} />
+        </View>
+      </View>
+
+    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
+
 const styles = StyleSheet.create({
-    main: {},
-    mapRegion: {
-      alignItems: 'stretch',
-      justifyContent: 'flex-start',
-      height: '33%',
-      width: '90%'
+    main: {
+      justifyContent: 'center'
+    },
+    dropdown: {
+      width: '75%'
     },
     detailsRegion: {
       height: '33%',
@@ -74,6 +133,17 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       width: '90%',
       marginTop: '4%',
+    },
+    pickerText: {},
+    textInput: {
+      borderColor: 'blue',
+      borderWidth: 2,
+      height: '33%'
+    },
+    textBoxArea: {},
+    submitButton: {
+      height: 50,
+      marginTop: 5
     }
 })
 
