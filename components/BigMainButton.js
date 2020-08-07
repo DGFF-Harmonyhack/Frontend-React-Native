@@ -2,13 +2,19 @@
 // make the onPress go to next screen 
 // pull lot/lat data on submit 
 
+// change button component into touchableOpacity so we can change the text size inside
+
 // the please record me button #1
 
 import React, { useEffect } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Dimensions} from 'react-native';
 // this is the import you need for navigation done outside of screens
 import { useNavigation } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications'
+
+import { useSelector, useDispatch } from 'react-redux'
+import * as eventsActions from '../store/actions/events'
+
 
 // while app run upfront, the local notification will show --GA
 Notifications.setNotificationHandler({
@@ -22,6 +28,15 @@ Notifications.setNotificationHandler({
 const BigMainButton = props => {
     // mimic the syntax and use navigation inside of a component
     const navigation = useNavigation();
+
+    const currentUserId = useSelector(state => state.users.user_id)
+    const dispatch = useDispatch()
+
+    //
+    // use onPress dispatch(eventsActions.createEvent(user_id, lat, long))
+    // need to pull lat long data somehow 
+    // then go to next page or confirm modal 
+    //
 
     // the reacting of users to notifications --GA
     useEffect(() => { 
@@ -77,30 +92,52 @@ const BigMainButton = props => {
             })
 
         })
+      nextScreenHandler();
+    }
+
+    const nextScreenHandler = () => {
+        let dummyLat = -53.2819099722496
+        let dummyLong = -137.337367605752
+
+        dispatch(eventsActions.createEvent(currentUserId, dummyLat, dummyLong))
+        navigation.navigate('FollowUp')
     }
 
   
     return (
         <View style={styles.button}>
-            <Text style={styles.textStyle}>The BigMainButton</Text>
+            <View style={styles.textContainer}>
             <Button 
+           
                 title="Please Record Me!" 
                 // once follow up is loaded, we can async trigger database create
+//                 onPress={nextScreenHandler}
                 // onPress={() => navigation.navigate('FollowUp')}  -- moved it
                 
                 // bigmainbutton should trigger push notification --GA
                //implement notification with onpress --GA
                onPress={triggerNotificationHandler}
             />
+            </View>
         </View>
     )
 }
 const styles = StyleSheet.create({
+    textContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: .5
+    }, 
     textStyle: {
-        textAlign: 'center'
+        flex: 1,
+        textAlign:'center',
+        justifyContent: 'center'
     },
     button: {
-        borderWidth: 5
+        borderWidth: 5, 
+        borderRadius: 400,
+        backgroundColor: 'red',
+        height: Dimensions.get('window').width ,
     }
 })
 export default BigMainButton; 

@@ -10,15 +10,13 @@
 //X drop down for response
 //X + useState
 
-//
-
-
 
 // this is # 3, the confirmation screen
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Picker } from '@react-native-community/picker';
+
 
 import { useSelector, useDispatch } from 'react-redux';
 import * as eventsActions from '../store/actions/events'

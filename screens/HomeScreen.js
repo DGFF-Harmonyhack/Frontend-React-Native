@@ -44,12 +44,15 @@ const HomeScreen = props => {
     // boolean switch to see if setListOfSavedReqs needs to be run
     const [isThereNewSave, setIsThereNewSave] = useState(false);
 
-    // redux testing
-    const allEvents = useSelector(state => state.events.allEvents);
+    // redux testing 
+    const currentUserId = useSelector(state => state.users.user_id)
+    const allEvents = useSelector(state => state.events.allEvents)
     // allEvents.sort((event) => { event.create_at })
-    const savedEvents = useSelector(state => state.events.savedEvents);
+    // const savedEvents = useSelector(state => state.events.savedEvents) 
+    const currentEvent = useSelector(state => state.events.currentEvent)
 
-    const allResponses = useSelector(state => state.responses.allResponses);
+    const allResponses = useSelector(state => state.responses.allResponses)
+
 
     const dispatch = useDispatch();
 
@@ -66,6 +69,18 @@ const HomeScreen = props => {
     //         console.log("check async", error)
     //     }
     // }
+
+    const changeDummyAsyncId = async () => {
+        // this is just for debugging. it is triggered in a useEffect below uncomment it if you want to change dummyid in async
+        // change the value for newDummyIdString to what you want the initial AsyncStorage 'user_id' to be in persisted memory
+        try {
+            let newDummyIdString = '219'
+            const userIdDummy = await AsyncStorage.setItem('user_id', newDummyIdString)
+        } catch (err) {
+            console.log("HomeScreen setItem(newDummyId) error", err)
+        }
+    }
+
 
     const readData = async () => {
         try {
@@ -86,6 +101,7 @@ const HomeScreen = props => {
 
     // component did mount
     useEffect(() => {
+        // changeDummyAsyncId()
         // console.log("pulled from state", userIdInRedux)
         readData()
         dispatch(eventsActions.fetchEvents())
@@ -93,10 +109,13 @@ const HomeScreen = props => {
     }, [dispatch]);
 
     // debug useEffect
-    // useEffect(() => {
-    //     // console.log("Repeat HomeScreen useEffect", allResponses[0], allResponses[1])
-    //     // checkAsync()
-    // })
+    useEffect(() => {
+        console.log("HomeScreen currentUserId", currentUserId)
+        console.log("HomeScreen currentEvent", currentEvent)
+        // console.log("Repeat HomeScreen useEffect", allResponses[0], allResponses[1])
+        // checkAsync()
+
+    })
 
 
     //check notification permission status -- GA
@@ -116,16 +135,17 @@ const HomeScreen = props => {
 
 
 
-    // test new
+    // test new 
+    // you have to change the args with dummy data from your rails localhost:3000/____
     const createNewHandler = () => {
-        dispatch(responsesActions.createResponse(126, "sdfasdf", "asdfasdf", 222))
+        // user_id, has_evidence, comment, event_id
+        // dispatch(responsesActions.createResponse(126, false, "asdfasdf", 222))
+        dispatch(eventsActions.createEvent(currentUserId, -53.2819099722496, -137.337367605752))
 
-        // user_id,
-        // location,
-        // description,
-        // event_id
-    };
-
+    }
+    const updateTestHandler = () => {
+        dispatch(eventsActions.updateEvent(218, 232, "asdf", true))
+    }
 
 
 
@@ -156,6 +176,21 @@ const HomeScreen = props => {
 
 
             {/* redux + componentDidMount testing  */}
+
+            <Text>All Responses</Text>
+            <View style={styles.flatList}>
+                {allResponses.map((response) => (
+                    <View key={response.id}>
+                        <Text>response id: {response.id}</Text>
+                        <Text>response event_id: {response.event_id}</Text>
+                        <Text>response resolved?: {response.has_evidence ? "YES" : "NO"}</Text>
+                        <Text>response description: {response.comment}</Text>
+                        <Text>response user_id: {response.user_id}</Text>
+                        <Text>response created_at: {response.created_at}</Text>
+                        <Text>response updated_at: {response.updated_at}</Text>
+                    </View>
+                ))}
+            </View>
 
             <Text>All Events</Text>
             <View style={styles.flatList}>
