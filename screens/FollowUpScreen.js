@@ -18,7 +18,6 @@ const FollowUpScreen = props => {
     
     const { navigation } = props
 
-    const dispatch = useDispatch()
     const currentEvent = useSelector((state) => state.events.currentEvent)
     const currentUserId = useSelector(state => state.users.user_id)
 
