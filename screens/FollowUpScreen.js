@@ -55,7 +55,10 @@ const FollowUpScreen = props => {
                     <View style={styles.modalContentContainer}>
                         <Text>Is this correct? </Text>
                         <View>
-                            <Text>blah blah the form info + location + all that jazz</Text>
+                            <Text>Description:</Text>
+                            <Text>{descriptionField}</Text>
+                            <Text>STATUS</Text>
+                            <Text>{isSelectedSafeButton? "Safe": "Need Evidence"}</Text>
                         </View>
                     </View>
                     <View style={styles.modalButtonContainer}>
