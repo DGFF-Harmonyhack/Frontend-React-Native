@@ -106,7 +106,7 @@ const BigMainButton = props => {
   
     return (
         <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={triggerNotificationHandler}>
                 <Text style={styles.buttonText}>Record Me!</Text>
             </TouchableOpacity>
             {/* <Button 
