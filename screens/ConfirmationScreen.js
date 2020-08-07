@@ -10,7 +10,6 @@
 //X drop down for response
 //X + useState
 
-
 // this is # 3, the confirmation screen
 
 import React, { useState } from 'react';
@@ -39,8 +38,6 @@ const ConfirmationScreen = props => {
 
   const submitEvent = () => {
     //call response action to create new response, using dropdown choice and text input and current user  and event id
-      // user_id, event_id, hasEvidence, description
-
       // Temp fix with random user and event
 
     dispatch(responsesActions.createResponse(fakeUser, fakeEvent, responseChoice, inputResponse))
@@ -52,7 +49,7 @@ const ConfirmationScreen = props => {
        style={styles.main}
        behavior={Platform.OS == "ios" ? "padding" : "height"}
      >
-        <Text>{props.event.description || "rando event"}</Text>
+        <Text>{/*props.event.description ||*/}rando event</Text>
 
         <View style={styles.dropdown}>
           <Picker
@@ -113,17 +110,11 @@ const ConfirmationScreen = props => {
         <FlatList
           data={relevantResponses}
           renderItem={({item}) => { return (
-            <View style={styles.responseListItem}
-            <Text
-              style={styles.responseType}
-              >
-                {item.response_type}
-            </Text>
-            <Text
-              style={styles.responseDetail}
-              >
-                {item.details}
-            </Text> )
+              <View style={styles.responseListItem}>
+                <Text style={styles.responseType}>{item.response_type}</Text>
+                <Text style={styles.responseDetail}>{item.details}</Text>
+              </View>
+            );
           }}
           keyExtractor={(item) => item.id}
         />
