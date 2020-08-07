@@ -86,7 +86,7 @@ const BigMainButton = props => {
             <Button 
                 title="Please Record Me!" 
                 // once follow up is loaded, we can async trigger database create
-                // onPress={() => navigation.navigate('FollowUp')}  -- moved it to triggerNotificationHandler -- GA
+                // onPress={() => navigation.navigate('FollowUp')}  -- moved it
                 
                 // bigmainbutton should trigger push notification --GA
                //implement notification with onpress --GA

@@ -81,7 +81,11 @@ export default function App() {
                 {props => <HomeScreen {...props} pushToken={pushToken} />}
             </Stack.Screen>
             <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
-            <Stack.Screen name="FollowUp" component={FollowUpScreen} />
+            {/* <Stack.Screen name="FollowUp" component={FollowUpScreen} /> */}
+            {/*pass down pushToken */}
+            <Stack.Screen name="FollowUp" >
+                {props => <FollowUpScreen {...props} pushToken={pushToken} />}
+            </Stack.Screen>
             <Stack.Screen name="Map" component={MapScreen} />
           </Stack.Navigator>
       </NavigationContainer>
