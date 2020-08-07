@@ -60,7 +60,8 @@ export default function App() {
    
       const token = response
       setPushToken(token)
-      //console.log('token', token)
+      // fetch should be done to send back every pushToken to backend -- GA
+     
       // use expo push notification tool to test the token https://expo.io/notifications --GA
       
     })
@@ -80,7 +81,11 @@ export default function App() {
                 {props => <HomeScreen {...props} pushToken={pushToken} />}
             </Stack.Screen>
             <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
-            <Stack.Screen name="FollowUp" component={FollowUpScreen} />
+            {/* <Stack.Screen name="FollowUp" component={FollowUpScreen} /> */}
+            {/*pass down pushToken */}
+            <Stack.Screen name="FollowUp" >
+                {props => <FollowUpScreen {...props} pushToken={pushToken} />}
+            </Stack.Screen>
             <Stack.Screen name="Map" component={MapScreen} />
           </Stack.Navigator>
       </NavigationContainer>

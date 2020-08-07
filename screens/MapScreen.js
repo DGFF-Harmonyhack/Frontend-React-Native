@@ -17,6 +17,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux'
+import * as eventsActions from '../store/actions/events'
+
 
 import Map from '../components/Map';
 import SearchBar from '../components/SearchBar'
@@ -25,6 +28,13 @@ import ListOfEvents from '../components/ListOfEvents'
 const MapScreen = props => {
   const [event, selectEvent] = useState({});
   console.log('map screen');
+
+  const dispatch = useDispatch()
+  const currentEvent = useSelector((state) => state.events.currentEvent)
+  const currentUserId = useSelector(state => state.users.user_id)
+
+  // when clicking on a Map marker trigger dispatch(eventsActions.setCurrentEvent(markerEventObject))
+  // after dispatch the variable currentEvent should show the clicked event
 
   const navigation = useNavigation();
 

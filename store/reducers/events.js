@@ -1,11 +1,13 @@
 // import { ActionSheetIOS } from 'react-native'
 import { 
     SET_EVENTS, 
-    CREATE_EVENT
+    CREATE_EVENT,
+    UPDATE_EVENT,
+    SET_CURRENT_EVENT
 } from '../actions/events'
 
 // import { useSelector } from 'react-redux'
-
+// how to get user_id inside the reducer????
 
 const initialState ={
     allEvents: [],
@@ -35,6 +37,25 @@ const eventsReducer = (state = initialState, action) => {
                 ], 
                 currentEvent: action.events
             }
+        case UPDATE_EVENT: 
+            // console.log("reducers/events update_event trigger", action.events)
+            // this needs checking with a proper call  
+            const eventIndex = state.allEvents.findIndex(event => event.id === action.events.id)
+            const updatedEventsArray = [...state.allEvents]
+            updatedEventsArray[eventIndex] = action.events
+
+            // console.log("updated event happened, this should trigger from followupscreen modal click yes", action.events)
+            return {
+                ...state, 
+                allEvents: updatedEventsArray, 
+                currentEvent: action.events
+            }
+        case SET_CURRENT_EVENT: 
+            return {
+                ...state, 
+                currentEvent: action.event
+            }
+
         default: 
             return state; 
     }
