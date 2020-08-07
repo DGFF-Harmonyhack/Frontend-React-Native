@@ -41,19 +41,9 @@ const ConfirmationScreen = props => {
     //call response action to create new response, using dropdown choice and text input and current user  and event id
       // user_id, event_id, hasEvidence, description
 
-<<<<<<< Updated upstream
-      // Temp fix with random user and event, and accomodating current inadequate schema
-      let fakeUser = 1 // CurrentUser will work when merged with DOms new PR, for now use fake one.
-      let fakeEvent = 2 // Once map screen can actually select an event, it will be accessible as props.event. Til then use fake.
-      let hasEvidence = true // THis will probably change with a schema refactor
-      let description = { responseChoice: inputResponse }
-
-    dispatch(responsesActions.createResponse(fakeUser, fakeEvent, hasEvidence, description.toString()))
-=======
       // Temp fix with random user and event
 
     dispatch(responsesActions.createResponse(fakeUser, fakeEvent, responseChoice, inputResponse))
->>>>>>> Stashed changes
   };
 
   return (
