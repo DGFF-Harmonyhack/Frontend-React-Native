@@ -14,7 +14,7 @@
 // this is # 3, the confirmation screen
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback, FlatList } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
 
@@ -31,12 +31,17 @@ const ConfirmationScreen = props => {
   [inputResponse, setInput] = useState('');
 
   const allResponses = useSelector(state => state.responses.allResponses);
-  const currentUser = useSelector(state => state.users.user_id)
+  const currentUser = useSelector(state => state.users.user_id);
+  let fakeUser = 1 // CurrentUser will work when merged with DOms new PR, for now use fake one.
+  let fakeEvent = 2 // Once map screen can actually select an event, it will be accessible as props.event. Til then use fake.
+
+  const relevantResponses = allResponses.filter(r=>r.event_id === fakeEvent)
 
   const submitEvent = () => {
     //call response action to create new response, using dropdown choice and text input and current user  and event id
       // user_id, event_id, hasEvidence, description
 
+<<<<<<< Updated upstream
       // Temp fix with random user and event, and accomodating current inadequate schema
       let fakeUser = 1 // CurrentUser will work when merged with DOms new PR, for now use fake one.
       let fakeEvent = 2 // Once map screen can actually select an event, it will be accessible as props.event. Til then use fake.
@@ -44,6 +49,11 @@ const ConfirmationScreen = props => {
       let description = { responseChoice: inputResponse }
 
     dispatch(responsesActions.createResponse(fakeUser, fakeEvent, hasEvidence, description.toString()))
+=======
+      // Temp fix with random user and event
+
+    dispatch(responsesActions.createResponse(fakeUser, fakeEvent, responseChoice, inputResponse))
+>>>>>>> Stashed changes
   };
 
   return (
@@ -52,15 +62,7 @@ const ConfirmationScreen = props => {
        style={styles.main}
        behavior={Platform.OS == "ios" ? "padding" : "height"}
      >
-        <Text>The Confirmation Screen</Text>
-
-        {/* SHow event details */}
-        <View style={styles.detailsRegion}>
-          <Text>Details</Text>
-
-        {/* again, random assumption that event is an object with a description property that's a string. change when data structure gets fleshed out, */}
-          <Text>{/* props.event.description */}</Text>
-        </View>
+        <Text>{props.event.description || "rando event"}</Text>
 
         <View style={styles.dropdown}>
           <Picker
@@ -70,22 +72,22 @@ const ConfirmationScreen = props => {
           >
             <Picker.Item
               label='I have evidence.'
-              value='haveEvi'
+              value='I have evidence: '
             />
 
             <Picker.Item
               label='I need evidence.'
-              value='needEvi'
+              value='I need evidence: '
             />
 
             <Picker.Item
               label="I don't have evidence."
-              value='noEvi'
+              value="I don't have evidence: "
             />
 
             <Picker.Item
               label='Other... See written response.'
-              value='other'
+              value='Other... See written response: '
             />
           </Picker>
         </View>
@@ -112,6 +114,29 @@ const ConfirmationScreen = props => {
             title="Submit Response"
             onPress={submitEvent} />
         </View>
+      </View>
+
+      {/* SHow event details */}
+      <View style={styles.detailsRegion}>
+        <Text>Responses</Text>
+
+        <FlatList
+          data={relevantResponses}
+          renderItem={({item}) => { return (
+            <View style={styles.responseListItem}
+            <Text
+              style={styles.responseType}
+              >
+                {item.response_type}
+            </Text>
+            <Text
+              style={styles.responseDetail}
+              >
+                {item.details}
+            </Text> )
+          }}
+          keyExtractor={(item) => item.id}
+        />
       </View>
 
     </KeyboardAvoidingView>
@@ -144,7 +169,10 @@ const styles = StyleSheet.create({
     submitButton: {
       height: 50,
       marginTop: 5
-    }
+    },
+    responseType: {},
+    responseDetail: {},
+    responseListItem: {}
 })
 
 export default ConfirmationScreen;
