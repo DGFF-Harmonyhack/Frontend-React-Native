@@ -12,6 +12,9 @@ import { View, Text, Button, StyleSheet, Dimensions} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications'
 
+import { useSelector, useDispatch } from 'react-redux'
+import * as eventsActions from '../store/actions/events'
+
 
 // while app run upfront, the local notification will show --GA
 Notifications.setNotificationHandler({
@@ -25,6 +28,15 @@ Notifications.setNotificationHandler({
 const BigMainButton = props => {
     // mimic the syntax and use navigation inside of a component
     const navigation = useNavigation();
+
+    const currentUserId = useSelector(state => state.users.user_id)
+    const dispatch = useDispatch()
+
+    //
+    // use onPress dispatch(eventsActions.createEvent(user_id, lat, long))
+    // need to pull lat long data somehow 
+    // then go to next page or confirm modal 
+    //
 
     // the reacting of users to notifications --GA
     useEffect(() => { 

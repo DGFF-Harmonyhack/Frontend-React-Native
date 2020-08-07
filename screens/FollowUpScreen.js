@@ -17,7 +17,13 @@ const FollowUpScreen = props => {
     const [isResolved, setIsResolved] = useState(false)
     
     const { navigation } = props
+
+    const dispatch = useDispatch()
     const currentEvent = useSelector((state) => state.events.currentEvent)
+    const currentUserId = useSelector(state => state.users.user_id)
+
+    //  when updating the event onSubmit use below 
+    //  dispatch(eventsActions.updateEvent(user_id, event_id, description, resolved_stat))
 
     const submitHandler = () => {
         // this will make an update, should probably send 

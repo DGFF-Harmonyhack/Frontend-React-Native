@@ -21,8 +21,20 @@ import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
 import Map from '../components/Map'
+import { useSelector, useDispatch } from 'react-redux'
+import * as responsesActions from '../store/actions/responses'
+
 
 const ConfirmationScreen = ({ event }) => {
+  const currentEvent = useSelector(state => state.events.currentEvent)
+  const currentUserId = useSelector(state => state.users.user_id)
+
+  const dispatch = useDispatch();
+  // still need a variable to show all related responses? 
+
+  // use dispatch(responsesActions.createResponse(user_id, has_evidence, comment, event_id))
+
+
   return (
     <View style={styles.main}>
         <Text>The Confirmation Screen</Text>
