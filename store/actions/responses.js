@@ -3,7 +3,7 @@ export const CREATE_RESPONSE = 'CREATE_RESPONSE';
 
 import BackendAddress from '../../constants/BackendAddress'
 
-// USING YOUR ASYNC FETCH 
+// USING YOUR ASYNC FETCH
 
 export const fetchResponses = () => {
     return async dispatch => {
@@ -11,7 +11,7 @@ export const fetchResponses = () => {
         const responseData = await response.json()
         // console.log("actions/responses fetchRespones", responseData)
         dispatch({
-            type: SET_RESPONSES, 
+            type: SET_RESPONSES,
             responses: responseData
         })
     }
@@ -19,23 +19,23 @@ export const fetchResponses = () => {
 
 
 // fill in the values needed ******
-export const createResponse = (user_id, location, description, event_id) => {
+export const createResponse = (user_id, event_id, has_evidence, comment) => {
     return async dispatch => {
         // any async code you want
-        const response = await fetch(`${BackendAddress.API}/events`, {
+        const response = await fetch(`${BackendAddress.API}/responses`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }, 
+            },
             body: JSON.stringify({
-                user_id, 
-                location, 
-                description, 
-                event_id
+                user_id,
+                event_id,
+                has_evidence,
+                comment
             })
         })
         const responseData = await response.json()
-        // console.log(responseData)
+        console.log(responseData)
 
         dispatch({
             type: CREATE_RESPONSE,
