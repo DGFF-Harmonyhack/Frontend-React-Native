@@ -61,7 +61,6 @@ export const updateEvent = (user_id, event_id, description, resolved_stat) => {
                 description, 
                 resolved_stat
             })
-
         })
         const rData = await response.json()
 

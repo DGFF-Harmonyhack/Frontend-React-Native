@@ -6,7 +6,7 @@ import {
 } from '../actions/events'
 
 // import { useSelector } from 'react-redux'
-
+// how to get user_id inside the reducer????
 
 const initialState ={
     allEvents: [],
@@ -38,8 +38,13 @@ const eventsReducer = (state = initialState, action) => {
             }
         case UPDATE_EVENT: 
             console.log("reducers/events update_event trigger", action.events)
+            // this needs checking with a proper call  
+            const eventIndex = state.allEvents.findIndex(event => event.id === action.events.id)
+            const updatedEventsArray = [...state.allEvents]
+            updatedEventsArray[eventIndex] = action.events
             return {
-                state
+                ...state, 
+                allEvents: updatedEventsArray
             }
         default: 
             return state; 
