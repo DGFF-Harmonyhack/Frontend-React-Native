@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function Form() {
