@@ -7,17 +7,18 @@
 // it will have all the follow up stuff for the person who pressed the button 
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, Dimensions, Modal } from 'react-native';
 import * as eventsActions from '../store/actions/events'
 import { useSelector, useDispatch } from 'react-redux'
 
 const FollowUpScreen = props => {
     const dispatch = useDispatch()
     const [descriptionField, setDescriptionField] = useState('')
-    const [isResolved, setIsResolved] = useState(false)
+    // const [isResolved, setIsResolved] = useState(false)
     const [isSelectedSafeButton, setSelectedSafeButton] = useState(false)
     const [isSelectedEvidenceButton, setSelectedEvidenceButton] = useState(false)
-    
+    const [confirmationModal, setConfirmationModal] = useState(false)
+
     const { navigation } = props
 
     const currentEvent = useSelector((state) => state.events.currentEvent)
@@ -51,8 +52,14 @@ const FollowUpScreen = props => {
         }
     }
 
-    const resolutionStatusHandler = (eventStatus) => {
-        eventStatus === "Safe" ? setIsResolved(true) : setIsResolved(false)
+    // const resolutionStatusHandler = (eventStatus) => {
+    //     eventStatus === "Safe" ? setIsResolved(true) : setIsResolved(false)
+    // }
+
+    const submitHelperInModal = (arg) => {
+
+        setDescriptionField('');
+        navigation.navigate("Home")
     }
 
     return (
@@ -67,6 +74,33 @@ const FollowUpScreen = props => {
 
             submit button, update backend, validate if one of the buttons was pressed, preview modal maybe?  
 */}
+            <View >
+                <Modal
+                    animationType="slide"
+                    visible={confirmationModal}
+                >
+                    <View style={styles.modalContentContainer}>
+                        <Text>Is this correct? </Text>
+                        <View>
+                            <Text>blah blah the form info + location + all that jazz</Text>
+                        </View>
+                    </View>
+                    <View style={styles.modalButtonContainer}>
+                        <View style={styles.modalButton}>
+                            <Button 
+                                title="YES"
+                                onPress={submitHelperInModal}
+                            />
+                        </View>
+                        <View style={styles.modalButton}>
+                            <Button 
+                                title="NO"
+                                onPress={() => {setConfirmationModal(false)}}
+                            />
+                        </View>
+                    </View>
+                </Modal>
+            </View>
             <View style={styles.buttonContainer}>
                 {/* <View style={styles.button}> */}
                     <View style={[isSelectedSafeButton? styles.unSelected : styles.selected]} >
@@ -101,7 +135,7 @@ const FollowUpScreen = props => {
             <View>
                 <Button 
                     title="Submit" 
-                    onPress={submitHandler}
+                    onPress={() => {setConfirmationModal(true)}}
                     accessibilityLabel="Submit your follow up."
                 />
             </View>
@@ -121,13 +155,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: '80%'
     },
-    // button: {
-    //     width: '40%',
-    //     borderColor: 'black', 
-    //     borderWidth: 1, 
-    //     margin: 10, 
-    //     padding: 10,
-    // },
     main: {
         flex: 1,
         justifyContent: 'center',
@@ -144,7 +171,23 @@ const styles = StyleSheet.create({
         // this is the width value 
         width: Dimensions.get('window').width * 0.8
     },
-
+    modalContentContainer: {
+        flex: .7,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22    
+    },
+    modalButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        // width: '60%'
+    },
+    modalButton: {
+        margin: 30,
+        // borderWidth: 1
+        // width: '40%',
+        // borderColor: 'black'
+    }
 })
 
 export default FollowUpScreen; 
