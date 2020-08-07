@@ -4,7 +4,7 @@ import {
 } from '../actions/users'
 
 const initialState ={
-    user_id: "initialUserId",
+    user_id: "",
     uu: ""
 }
 

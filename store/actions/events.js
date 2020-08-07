@@ -5,6 +5,7 @@
 export const CREATE_EVENT = 'CREATE_EVENT';
 export const SET_EVENTS = 'SET_EVENTS';
 export const UPDATE_EVENT = 'UPDATE_EVENT';
+export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT'
 
 import BackendAddress from '../../constants/BackendAddress'
 
@@ -69,4 +70,8 @@ export const updateEvent = (user_id, event_id, description, resolved_stat) => {
             events: rData
         })
     }
+}
+
+export const setCurrentEvent = (currentEvent) => {
+    return ({ type: SET_CURRENT_EVENT, event: currentEvent})
 }

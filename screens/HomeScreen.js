@@ -45,11 +45,14 @@ const HomeScreen = props => {
     const [isThereNewSave, setIsThereNewSave] = useState(false)
 
     // redux testing 
+    const currentUserId = useSelector(state => state.users.user_id)
     const allEvents = useSelector(state => state.events.allEvents)
     // allEvents.sort((event) => { event.create_at })
-    const savedEvents = useSelector(state => state.events.savedEvents) 
+    // const savedEvents = useSelector(state => state.events.savedEvents) 
+    const currentEvent = useSelector(state => state.events.currentEvent)
 
     const allResponses = useSelector(state => state.responses.allResponses)
+    
 
     const dispatch = useDispatch();
 
@@ -66,6 +69,18 @@ const HomeScreen = props => {
     //         console.log("check async", error)
     //     }
     // }
+
+    const changeDummyAsyncId = async () => {
+        // this is just for debugging. it is triggered in a useEffect below uncomment it if you want to change dummyid in async
+        // change the value for newDummyIdString to what you want the initial AsyncStorage 'user_id' to be in persisted memory
+        try {
+            let newDummyIdString = '219'
+            const userIdDummy = await AsyncStorage.setItem('user_id', newDummyIdString)
+        } catch (err) {
+            console.log("HomeScreen setItem(newDummyId) error", err)
+        }
+    }
+
 
     const readData = async () => {
         try {
@@ -86,6 +101,7 @@ const HomeScreen = props => {
 
     // component did mount 
     useEffect(() => {
+        // changeDummyAsyncId()
         // console.log("pulled from state", userIdInRedux)
         readData()
         dispatch(eventsActions.fetchEvents())
@@ -93,10 +109,13 @@ const HomeScreen = props => {
     }, [dispatch]);
 
     // debug useEffect
-    // useEffect(() => {
-    //     // console.log("Repeat HomeScreen useEffect", allResponses[0], allResponses[1])
-    //     // checkAsync()
-    // })
+    useEffect(() => {
+        console.log("HomeScreen currentUserId", currentUserId)
+        console.log("HomeScreen currentEvent", currentEvent)
+        // console.log("Repeat HomeScreen useEffect", allResponses[0], allResponses[1])
+        // checkAsync()
+
+    })
 
 
     //check notification permission status -- GA
@@ -120,7 +139,8 @@ const HomeScreen = props => {
     // you have to change the args with dummy data from your rails localhost:3000/____
     const createNewHandler = () => {
         // user_id, has_evidence, comment, event_id
-        dispatch(responsesActions.createResponse(126, false, "asdfasdf", 222))
+        // dispatch(responsesActions.createResponse(126, false, "asdfasdf", 222))
+        dispatch(eventsActions.createEvent(currentUserId, -53.2819099722496, -137.337367605752))
 
     }
     const updateTestHandler = () => {
@@ -152,7 +172,7 @@ const HomeScreen = props => {
 
             <Button 
                 title="TEST NEW"
-                onPress={updateTestHandler}
+                onPress={createNewHandler}
             />
 
         

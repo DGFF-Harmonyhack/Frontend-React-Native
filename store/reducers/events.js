@@ -2,7 +2,8 @@
 import { 
     SET_EVENTS, 
     CREATE_EVENT,
-    UPDATE_EVENT
+    UPDATE_EVENT,
+    SET_CURRENT_EVENT
 } from '../actions/events'
 
 // import { useSelector } from 'react-redux'
@@ -44,8 +45,15 @@ const eventsReducer = (state = initialState, action) => {
             updatedEventsArray[eventIndex] = action.events
             return {
                 ...state, 
-                allEvents: updatedEventsArray
+                allEvents: updatedEventsArray, 
+                currentEvent: action.events
             }
+        case SET_CURRENT_EVENT: 
+            return {
+                ...state, 
+                currentEvent: action.event
+            }
+
         default: 
             return state; 
     }
