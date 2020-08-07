@@ -7,7 +7,7 @@
 // it will have all the follow up stuff for the person who pressed the button 
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, Dimensions } from 'react-native';
 import * as eventsActions from '../store/actions/events'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -15,6 +15,8 @@ const FollowUpScreen = props => {
     const dispatch = useDispatch()
     const [descriptionField, setDescriptionField] = useState('')
     const [isResolved, setIsResolved] = useState(false)
+    const [isSelectedSafeButton, setSelectedSafeButton] = useState(false)
+    const [isSelectedEvidenceButton, setSelectedEvidenceButton] = useState(false)
     
     const { navigation } = props
 
@@ -39,13 +41,23 @@ const FollowUpScreen = props => {
 
     }
 
+    const buttonSelectorHelper = (buttonValue) => {
+        if (buttonValue === 'Safe') {
+            setSelectedSafeButton(true)
+            setSelectedEvidenceButton(false)
+        } else if (buttonValue === 'Help') {
+            setSelectedSafeButton(false)
+            setSelectedEvidenceButton(true)
+        }
+    }
+
     const resolutionStatusHandler = (eventStatus) => {
         eventStatus === "Safe" ? setIsResolved(true) : setIsResolved(false)
     }
 
     return (
-        <View>
-            <Text>The FollowUpScreen</Text>
+        <View style={styles.main}>
+
 {/*             
             i am safe button, manage state 
 
@@ -55,29 +67,32 @@ const FollowUpScreen = props => {
 
             submit button, update backend, validate if one of the buttons was pressed, preview modal maybe?  
 */}
-            <View>
-                <View>
-                    <Button 
-                        title="I AM SAFE"
-                        onPress={resolutionStatusHandler.bind(this, "Safe")}
-                        accessibilityLabel="I am safe"
-                    />
-                </View>
-                <View>
-                    <Button 
-                        title="I NEED EVIDENCE"
-                        onPress={resolutionStatusHandler.bind(this, "Help")}
-                        accessibilityLabel="I need evidence"
-                    />
-                </View>
+            <View style={styles.buttonContainer}>
+                {/* <View style={styles.button}> */}
+                    <View style={[isSelectedSafeButton?styles.selected:styles.unSelected]} >
+                        <Button 
+                            title="I AM SAFE"
+                            onPress={() => {buttonSelectorHelper("Safe")}}
+                            accessibilityLabel="I am safe"
+                        />
+                    </View>
+                {/* </View> */}
+                {/* <View style={styles.button}> */}
+                    {/* <View style={(selectedSafeButton ? styles.notSselected : styles.selected)} > */}
+
+                    <View style={[isSelectedEvidenceButton?styles.selected:styles.unSelected]} >
+                        <Button 
+                            title="I NEED EVIDENCE"
+                            onPress={() => {buttonSelectorHelper("Help")}}
+                            accessibilityLabel="I need evidence"
+                        />
+                    </View>
+                {/* </View> */}
             </View>
             <View>
                 <TextInput
-                    blurOnSubmit={true}
                     {...props}
-                    editable
-                    multiline={true}
-                    numberOfLines={3}
+                    style={styles.inputBox}
                     onChangeText={text => setDescriptionField(text)}
                     value={descriptionField}
                     placeholder="Please provide any information about what happened"
@@ -95,9 +110,45 @@ const FollowUpScreen = props => {
 }
 
 const styles = StyleSheet.create({
+    selcted: {
+        // uh..... for some reason this is not showing but notSelected is showing
+        // width: '40%',
+        backgroundColor: 'blue', 
+    }, 
+    unSelected: {
+        // backgroundColor: '#fff8dc',
+        // width: '40%',
+        backgroundColor: 'black', 
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '80%'
+    },
+    // button: {
+    //     width: '40%',
+    //     borderColor: 'black', 
+    //     borderWidth: 1, 
+    //     margin: 10, 
+    //     padding: 10,
+    // },
     main: {
-        flex: 0.3
-    }
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    inputBox: {
+        borderColor: 'black', 
+        borderWidth: 1, 
+        padding: 10,
+        width: '80%', 
+        marginBottom: 10, 
+        // this is the height value 
+        height: Dimensions.get('window').height * 0.3, 
+        // this is the width value 
+        width: Dimensions.get('window').width * 0.8
+    },
+
 })
 
 export default FollowUpScreen; 
