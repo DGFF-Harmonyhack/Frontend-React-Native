@@ -91,6 +91,14 @@ const BigMainButton = props => {
         })
     }
 
+    const nextScreenHandler = () => {
+        let dummyLat = -53.2819099722496
+        let dummyLong = -137.337367605752
+
+        dispatch(eventsActions.createEvent(currentUserId, dummyLat, dummyLong))
+        navigation.navigate('FollowUp')
+    }
+
   
     return (
         <View style={styles.button}>
@@ -99,7 +107,7 @@ const BigMainButton = props => {
            
                 title="Please Record Me!" 
                 // once follow up is loaded, we can async trigger database create
-                onPress={() => navigation.navigate('FollowUp')}
+                onPress={nextScreenHandler}
                 
                 // bigmainbutton should trigger notification --GA
                //implement notification with onpress --GA

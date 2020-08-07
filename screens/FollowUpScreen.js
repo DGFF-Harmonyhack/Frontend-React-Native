@@ -1,6 +1,6 @@
 // TO DO 
-// Submit needs to do an update dispatch for event resolved_stat + comment
-// Needs confirmation Modal 
+// [DONE - Dom]Submit needs to do an update dispatch for event resolved_stat + comment
+// [DONE - Dom]Needs confirmation Modal 
 // navigate to mapscreen instead onSubmit
 
 // in the diagram, this is #2, 
@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from 'react-redux'
 const FollowUpScreen = props => {
     const dispatch = useDispatch()
     const [descriptionField, setDescriptionField] = useState('')
-    // const [isResolved, setIsResolved] = useState(false)
     const [isSelectedSafeButton, setSelectedSafeButton] = useState(false)
     const [isSelectedEvidenceButton, setSelectedEvidenceButton] = useState(false)
     const [confirmationModal, setConfirmationModal] = useState(false)
@@ -27,21 +26,6 @@ const FollowUpScreen = props => {
     //  when updating the event onSubmit use below 
     //  dispatch(eventsActions.updateEvent(user_id, event_id, description, resolved_stat))
 
-    const submitHandler = () => {
-        // this will make an update, should probably send 
-        // user id / user uuid / event id / resolved boolean based on which button / description
-        // dispatch(eventsActions.updateEvent({ ...currentEvent, resolved_stat: isResolved, description: descriptionField }))
-
-        setDescriptionField('');
-
-        // show modal confirm
-
-        // after modal confirmation 
-        // navigate to mapScreen instead 
-        navigation.navigate("Home")
-
-    }
-
     const buttonSelectorHelper = (buttonValue) => {
         if (buttonValue === 'Safe') {
             setSelectedSafeButton(true)
@@ -52,28 +36,17 @@ const FollowUpScreen = props => {
         }
     }
 
-    // const resolutionStatusHandler = (eventStatus) => {
-    //     eventStatus === "Safe" ? setIsResolved(true) : setIsResolved(false)
-    // }
-
     const submitHelperInModal = (arg) => {
 
+        dispatch(eventsActions.updateEvent(currentUserId, currentEvent.id, descriptionField, isSelectedEvidenceButton))
         setDescriptionField('');
+
+        // this should probably go to some kind of details confirm?
         navigation.navigate("Home")
     }
 
     return (
         <View style={styles.main}>
-
-{/*             
-            i am safe button, manage state 
-
-            i need evidence button, manage state 
-
-            description field, manage state 
-
-            submit button, update backend, validate if one of the buttons was pressed, preview modal maybe?  
-*/}
             <View >
                 <Modal
                     animationType="slide"
@@ -102,26 +75,20 @@ const FollowUpScreen = props => {
                 </Modal>
             </View>
             <View style={styles.buttonContainer}>
-                {/* <View style={styles.button}> */}
-                    <View style={[isSelectedSafeButton? styles.unSelected : styles.selected]} >
-                        <Button 
-                            title="I AM SAFE"
-                            onPress={() => {buttonSelectorHelper("Safe")}}
-                            accessibilityLabel="I am safe"
-                        />
-                    </View>
-                {/* </View> */}
-                {/* <View style={styles.button}> */}
-                    {/* <View style={(selectedSafeButton ? styles.notSselected : styles.selected)} > */}
-
-                    <View style={[isSelectedEvidenceButton ? styles.unSelected : styles.selected]} >
-                        <Button 
-                            title="I NEED EVIDENCE"
-                            onPress={() => {buttonSelectorHelper("Help")}}
-                            accessibilityLabel="I need evidence"
-                        />
-                    </View>
-                {/* </View> */}
+                <View style={[isSelectedSafeButton? styles.unSelected : styles.selected]} >
+                    <Button 
+                        title="I AM SAFE"
+                        onPress={() => {buttonSelectorHelper("Safe")}}
+                        accessibilityLabel="I am safe"
+                    />
+                </View>
+                <View style={[isSelectedEvidenceButton ? styles.unSelected : styles.selected]} >
+                    <Button 
+                        title="I NEED EVIDENCE"
+                        onPress={() => {buttonSelectorHelper("Help")}}
+                        accessibilityLabel="I need evidence"
+                    />
+                </View>
             </View>
             <View>
                 <TextInput
@@ -184,9 +151,6 @@ const styles = StyleSheet.create({
     },
     modalButton: {
         margin: 30,
-        // borderWidth: 1
-        // width: '40%',
-        // borderColor: 'black'
     }
 })
 

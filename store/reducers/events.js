@@ -38,11 +38,13 @@ const eventsReducer = (state = initialState, action) => {
                 currentEvent: action.events
             }
         case UPDATE_EVENT: 
-            console.log("reducers/events update_event trigger", action.events)
+            // console.log("reducers/events update_event trigger", action.events)
             // this needs checking with a proper call  
             const eventIndex = state.allEvents.findIndex(event => event.id === action.events.id)
             const updatedEventsArray = [...state.allEvents]
             updatedEventsArray[eventIndex] = action.events
+
+            // console.log("updated event happened, this should trigger from followupscreen modal click yes", action.events)
             return {
                 ...state, 
                 allEvents: updatedEventsArray, 
