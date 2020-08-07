@@ -74,7 +74,7 @@ const HomeScreen = props => {
         // this is just for debugging. it is triggered in a useEffect below uncomment it if you want to change dummyid in async
         // change the value for newDummyIdString to what you want the initial AsyncStorage 'user_id' to be in persisted memory
         try {
-            let newDummyIdString = '219'
+            let newDummyIdString = '1'
             const userIdDummy = await AsyncStorage.setItem('user_id', newDummyIdString)
         } catch (err) {
             console.log("HomeScreen setItem(newDummyId) error", err)

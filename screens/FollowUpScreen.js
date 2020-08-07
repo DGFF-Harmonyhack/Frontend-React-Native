@@ -58,7 +58,7 @@ const FollowUpScreen = props => {
 
     const submitHelperInModal = (arg) => {
         resolutionStatusHandler(arg)
-        dispatch(eventsActions.updateEvent(currentUserId, currentEvent.id, descriptionField, isSelectedEvidenceButton))
+        dispatch(eventsActions.updateEvent(currentUserId, currentEvent.id, descriptionField, isSelectedSafeButton))
         setDescriptionField('');
         // this should probably go to some kind of details confirm?
         navigation.navigate("Home")
@@ -92,7 +92,9 @@ const FollowUpScreen = props => {
       
         if(eventStatus === "Safe"){
             setIsResolved(true)
+            // console.log("resolutionStatuHandler TRUE")
         }else{
+            // console.log("resolutionSolutionHandler False")
             setIsResolved(false)
              // trigger notification
         fetch('https://exp.host/--/api/v2/push/send', {
