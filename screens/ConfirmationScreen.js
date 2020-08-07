@@ -2,7 +2,7 @@
 
 // CONFIMRATION SCREEN NEEDS EVENT_ID maybe pull from currentEvent
 //
-// needs dispatch(responsesActions.createResponse())
+//X needs dispatch(responsesActions.createResponse())
 
 // see all responses to event
 
@@ -17,7 +17,7 @@
 // this is # 3, the confirmation screen
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -40,15 +40,16 @@ const ConfirmationScreen = props => {
       // user_id, event_id, hasEvidence, description
 
       // Temp fix with random user and event, and accomodating current inadequate schema
-      let fakeUser = 1 //CurrentUser will work when merged with DOms new PR, for now use fake one.
-      let fakeEvent = 2 //Once map screen can actually select an event, it will be accessible as props.event. Til then use fake.
-      let hasEvidence = true //THis will probably change with a schema refactor
+      let fakeUser = 1 // CurrentUser will work when merged with DOms new PR, for now use fake one.
+      let fakeEvent = 2 // Once map screen can actually select an event, it will be accessible as props.event. Til then use fake.
+      let hasEvidence = true // THis will probably change with a schema refactor
       let description = { responseChoice: inputResponse }
 
     dispatch(responsesActions.createResponse(fakeUser, fakeEvent, hasEvidence, description.toString()))
   };
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <KeyboardAvoidingView
        style={styles.main}
        behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -105,6 +106,7 @@ const ConfirmationScreen = props => {
             Keyboard.dismiss();
             submitEvent();
           }}
+          selectTextOnFocus={true}
         />
 
         <View style={styles.submitButton}>
@@ -114,10 +116,11 @@ const ConfirmationScreen = props => {
         </View>
       </View>
 
-    </KeyboardAvoidingView
-    >
+    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
+
 
 const styles = StyleSheet.create({
     main: {
