@@ -117,10 +117,14 @@ const HomeScreen = props => {
 
 
     // test new 
+    // you have to change the args with dummy data from your rails localhost:3000/____
     const createNewHandler = () => {
         // user_id, has_evidence, comment, event_id
         dispatch(responsesActions.createResponse(126, false, "asdfasdf", 222))
 
+    }
+    const updateTestHandler = () => {
+        dispatch(eventsActions.updateEvent(218, 232, "asdf", true))
     }
 
 
@@ -148,11 +152,26 @@ const HomeScreen = props => {
 
             <Button 
                 title="TEST NEW"
-                onPress={createNewHandler}
+                onPress={updateTestHandler}
             />
 
         
             {/* redux + componentDidMount testing  */}
+
+            <Text>All Responses</Text>
+            <View style={styles.flatList}>
+                {allResponses.map((response) => (
+                    <View key={response.id}>
+                        <Text>response id: {response.id}</Text>
+                        <Text>response event_id: {response.event_id}</Text>
+                        <Text>response resolved?: {response.has_evidence ? "YES" : "NO"}</Text>
+                        <Text>response description: {response.comment}</Text>
+                        <Text>response user_id: {response.user_id}</Text>
+                        <Text>response created_at: {response.created_at}</Text>
+                        <Text>response updated_at: {response.updated_at}</Text>
+                    </View>
+                ))}
+            </View>
 
             <Text>All Events</Text>
             <View style={styles.flatList}>

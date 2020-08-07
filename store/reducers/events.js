@@ -1,7 +1,8 @@
 // import { ActionSheetIOS } from 'react-native'
 import { 
     SET_EVENTS, 
-    CREATE_EVENT
+    CREATE_EVENT,
+    UPDATE_EVENT
 } from '../actions/events'
 
 // import { useSelector } from 'react-redux'
@@ -34,6 +35,11 @@ const eventsReducer = (state = initialState, action) => {
                     action.events
                 ], 
                 currentEvent: action.events
+            }
+        case UPDATE_EVENT: 
+            console.log("reducers/events update_event trigger", action.events)
+            return {
+                state
             }
         default: 
             return state; 

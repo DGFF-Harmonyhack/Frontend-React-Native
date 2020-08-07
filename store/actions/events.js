@@ -4,6 +4,7 @@
 
 export const CREATE_EVENT = 'CREATE_EVENT';
 export const SET_EVENTS = 'SET_EVENTS';
+export const UPDATE_EVENT = 'UPDATE_EVENT';
 
 import BackendAddress from '../../constants/BackendAddress'
 
@@ -23,7 +24,8 @@ export const fetchEvents = () => {
     }
 }
 
-export const createEvent = (user_id, location, description) => {
+// changed args
+export const createEvent = (user_id, lat, long) => {
     return async dispatch => {
         // any async code you want
         const response = await fetch(`${BackendAddress.API}/events`, {
@@ -33,8 +35,8 @@ export const createEvent = (user_id, location, description) => {
             }, 
             body: JSON.stringify({
                 user_id, 
-                location, 
-                description
+                lat, 
+                long            
             })
         })
         const responseData = await response.json()
@@ -49,13 +51,23 @@ export const createEvent = (user_id, location, description) => {
 
 export const updateEvent = (user_id, event_id, description, resolved_stat) => {
     return async dispatch => {
-        const response = await fetch('', {
+        const response = await fetch(`${BackendAddress.API}/events/${event_id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify({
+                user_id, 
+                description, 
+                resolved_stat
+            })
 
         })
         const rData = await response.json()
 
         dispatch({
-
+            type: UPDATE_EVENT, 
+            events: rData
         })
     }
 }
