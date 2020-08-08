@@ -38,6 +38,8 @@ const MapScreen = props => {
   // when clicking on a Map marker trigger dispatch(eventsActions.setCurrentEvent(markerEventObject))
   // after dispatch the variable currentEvent should show the clicked event
 
+  let descriptionText = currentEvent ? currentEvent.description : "Please Select An Event"
+
   const navigation = useNavigation();
 
     return (
@@ -52,16 +54,16 @@ const MapScreen = props => {
 
         {/* Map region, renders search bar and map components*/}
         <View style={styles.mapRegion}>
-          <SearchBar />
+          {/* <SearchBar /> */}
           <Map />
         </View>
 
         {/* Details region. Grabs the selected event from state, renders details.*/}
         <View style={styles.detailsRegion}>
-          <Text>Description</Text>
+          {/* <Text>Description: </Text> */}
 
           {/* Assuming selecting an event on the map calls selectEvent hook, and sets a Details property. Here i assume it's just some text */}
-          <Text>{event.details}</Text>
+          <Text>{descriptionText}</Text>
 
           {/* REspond button sends you to confirmation page. idk how to put it in the bottom corner */}
          
