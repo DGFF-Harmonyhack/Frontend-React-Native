@@ -1,6 +1,9 @@
 # README
 ![alt text](https://github.com/DGFF-Harmonyhack/Frontend-React-Native/blob/master/logo.png "Record Me")
 
+# Demo
+<a href="https://www.youtube.com/watch?v=mZlK-NMBzeE&feature=youtu.be" target="_blank"><img src="http://img.youtube.com/watch?v=mZlK-NMBzeE/0.jpg" alt="Demo Video" width="560" height="315" border="10" /></a>
+
 # RECORD ME 
 ** To get it started** 
 1. Get [the backend](https://github.com/DGFF-Harmonyhack/backend-ruby-rails "the backend").
