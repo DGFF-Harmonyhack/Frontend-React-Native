@@ -1,10 +1,25 @@
 // to do. put G's fetch from expo pushToken into Redux
-// make the onPress go to next screen 
-// pull lot/lat data on submit 
+// make the onPress go to next screen
+// pull lot/lat data on submit
 
 // change button component into touchableOpacity so we can change the text size inside
 
 // the please record me button #1
+
+
+// Object {
+//   "coords": Object {
+//     "accuracy": 5,
+//     "altitude": 0,
+//     "altitudeAccuracy": -1,
+//     "heading": -1,
+//     "latitude": 37.785834,
+//     "longitude": -122.406417,
+//     "speed": -1,
+//   },
+//   "timestamp": 1596853543443.9468,
+// }
+
 
 import React, { useEffect } from 'react';
 import { View, Text, Button, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
@@ -37,12 +52,12 @@ const BigMainButton = props => {
 
     //
     // use onPress dispatch(eventsActions.createEvent(user_id, lat, long))
-    // need to pull lat long data somehow 
-    // then go to next page or confirm modal 
+    // need to pull lat long data somehow
+    // then go to next page or confirm modal
     //
 
     // the reacting of users to notifications --GA
-    useEffect(() => { 
+    useEffect(() => {
         // how user interact with notification when app is not running -- GA
         // will lead the user back to the app -- GA
         const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
@@ -54,7 +69,7 @@ const BigMainButton = props => {
             (notification) => {
                 console.log(notification)
             }
-            
+
         )
 
         return () => {
@@ -106,19 +121,19 @@ const BigMainButton = props => {
         navigation.navigate('FollowUp')
     }
 
-  
+
     return (
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={triggerNotificationHandler}>
                 <Text style={styles.buttonText}>Record Me!</Text>
             </TouchableOpacity>
-            {/* <Button 
-            
-                title="Please Record Me!" 
+            {/* <Button
+
+                title="Please Record Me!"
                 // once follow up is loaded, we can async trigger database create
                 // onPress={nextScreenHandler}
                 // onPress={() => navigation.navigate('FollowUp')}  -- moved it
-                
+
                 // bigmainbutton should trigger push notification --GA
                 //implement notification with onpress --GA
                 onPress={triggerNotificationHandler}
@@ -130,24 +145,23 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flex: .5,
         justifyContent: 'center',
-        alignItems: 'center', 
+        alignItems: 'center',
         margin: Dimensions.get('window').height * .1
-    }, 
+    },
     buttonText: {
-        alignItems: 'center', 
-        fontSize: 50, 
-        // color: 'blue'
-    }, 
+        alignItems: 'center',
+        fontSize: 50,
+        color: 'snow'
+    },
     button: {
-        alignItems: 'center', 
-        padding: 10, 
+        alignItems: 'center',
+        padding: 10,
         borderRadius: 500,
-        borderWidth:1,
         alignItems:'center',
         justifyContent:'center',
-        height: Dimensions.get('window').width * .7, 
-        width: Dimensions.get('window').width * .7, 
-        backgroundColor: Colors.red
+        height: Dimensions.get('window').width * .7,
+        width: Dimensions.get('window').width * .7,
+        backgroundColor: Colors.red,
     }
 
     // textStyle: {
@@ -156,10 +170,10 @@ const styles = StyleSheet.create({
     //     justifyContent: 'center'
     // },
     // button: {
-    //     borderWidth: 5, 
+    //     borderWidth: 5,
     //     borderRadius: 400,
     //     backgroundColor: 'red',
     //     height: Dimensions.get('window').width ,
-    // }, 
+    // },
 })
-export default BigMainButton; 
+export default BigMainButton;

@@ -3,6 +3,7 @@
 // styling
 //
 
+// Make see more request a bigger nicer button
 
 
 // Obviously the home screen with the giant button and etc
@@ -109,6 +110,7 @@ const HomeScreen = props => {
         readData()
         dispatch(eventsActions.fetchEvents())
         dispatch(responsesActions.fetchResponses())
+        dispatch(userActions.setLocation())
     }, [dispatch]);
 
     // debug useEffect
@@ -155,7 +157,7 @@ const HomeScreen = props => {
     return (
         <View style={styles.main}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>APP HEADER</Text>
+                {/*<Text style={styles.headerText}>APP HEADER</Text>*/}
             </View>
             {/* custom button component  */}
             <BigMainButton  pushToken={props.pushToken}/>
@@ -166,12 +168,12 @@ const HomeScreen = props => {
                     onPress={() => navigation.navigate('Map')}
                 />
                 {/* this is how you pass down props, second arg  */}
-                <Button
+                {/*<Button
                     title="See Saved Requests"
                     onPress={() => navigation.navigate('Map', {
                         listOfSavedReqs: listOfSavedReqs
                     })}
-                />
+                />*/}
             </View>
 
 
