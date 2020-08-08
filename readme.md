@@ -2,11 +2,11 @@
 
 # RECORD ME 
 ** To get it started** 
-First, get [the backend](https://github.com/DGFF-Harmonyhack/backend-ruby-rails "the backend").
-Second, npm install.   
+1. Get [the backend](https://github.com/DGFF-Harmonyhack/backend-ruby-rails "the backend").
+2. Npm install.   
     - You may need [expo](https://expo.io/ "expo")
-Third, npm start. 
-Fourth, you can open a emulated OS in the browser. Otherwise you can either download an Android/iOS emulator or the Expo app in the appStore/playStore and scan the QR code shown in the broswer popup. 
+3. Npm start. 
+4. You can open a emulated OS in the browser. Otherwise you can either download an Android/iOS emulator or the Expo app in the appStore/playStore and scan the QR code shown in the broswer popup. 
 
 ## Inspiration
 The story of our group starts in **Brooklyn**, where the four of us met each other for the first time just before the quarantine. As time passed we saw a movement of fighting injustice and our neighborhood took to the streets. We kept in touch and decided to tackle a project based on our personal and local experience. 
