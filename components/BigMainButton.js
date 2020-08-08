@@ -66,35 +66,35 @@ const BigMainButton = props => {
     // notification trigger function --GA
     const triggerNotificationHandler = () => {
         // local notification  -- GA
-        // Notifications.scheduleNotificationAsync({
-        //     content: {
-        //         title: 'first local notification',
-        //         body: 'hello everybody'
-        //     },
-        //     trigger:{
-        //         seconds: 5
-        //     }
-        // })
+        Notifications.scheduleNotificationAsync({
+            content: {
+                title: 'Record Me',
+                body: 'Please record me, here is my address.'
+            },
+            trigger:{
+                seconds: 1
+            }
+        })
 
         // navigate to next page -- GA
         navigation.navigate('FollowUp')
         // push notification -- GA
         //https://exp.host/--/api/v2/push/send expo server -- GA
         
-        fetch('https://exp.host/--/api/v2/push/send', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Accept-Encoding': 'gzip, deflate',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                to: props.pushToken,
-                title: 'Record me!',
-                body: 'Please record me, here is my address'
-            })
+        // fetch('https://exp.host/--/api/v2/push/send', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Accept-Encoding': 'gzip, deflate',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         to: props.pushToken,
+        //         title: 'Record me!',
+        //         body: 'Please record me, here is my address'
+        //     })
 
-        })
+        // })
       nextScreenHandler();
     }
 

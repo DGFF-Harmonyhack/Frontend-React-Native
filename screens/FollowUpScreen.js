@@ -94,23 +94,45 @@ const FollowUpScreen = props => {
         if(eventStatus === "Safe"){
             setIsResolved(true)
             // console.log("resolutionStatuHandler TRUE")
+            // local notification  -- GA
+         Notifications.scheduleNotificationAsync({
+            content: {
+                title: "I'm safe",
+                body: 'Please delete the record me.'
+            },
+            trigger:{
+                seconds: 1
+            }
+        })
         }else{
             // console.log("resolutionSolutionHandler False")
             setIsResolved(false)
              // trigger notification
-        fetch('https://exp.host/--/api/v2/push/send', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Accept-Encoding': 'gzip, deflate',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                to: props.pushToken,
-                title: 'Need evidence',
-                body: 'Please send me the evidence'
-            })
+        // push notification -- GA
+        // fetch('https://exp.host/--/api/v2/push/send', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Accept-Encoding': 'gzip, deflate',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         to: props.pushToken,
+        //         title: 'Need evidence',
+        //         body: 'Please send me the evidence'
+        //     })
 
+        // })
+
+         // local notification  -- GA
+         Notifications.scheduleNotificationAsync({
+            content: {
+                title: 'Need Evidence',
+                body: 'Please send me the evidence.'
+            },
+            trigger:{
+                seconds: 1
+            }
         })
         }
        

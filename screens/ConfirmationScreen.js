@@ -12,7 +12,7 @@
 
 // this is # 3, the confirmation screen
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback, FlatList, Dimensions } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
@@ -21,6 +21,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as eventsActions from '../store/actions/events'
 import * as userActions from '../store/actions/users'
 import * as responsesActions from '../store/actions/responses'
+
+// notification  -- GA
+import * as Notifications from 'expo-notifications'
+
+// while app run upfront, the local notification will show --GA
+Notifications.setNotificationHandler({
+    handleNotification: async () => {
+        return {
+            shouldShowAlert: true
+        }
+    }
+})
 
 
 const ConfirmationScreen = props => {
@@ -44,7 +56,42 @@ const ConfirmationScreen = props => {
       // Temp fix with random user and event
 
     dispatch(responsesActions.createResponse(fakeUser, currentEvent.id, responseChoice, inputResponse))
+    // local notification 
+    Notifications.scheduleNotificationAsync({
+      content: {
+          title: "Response submitted",
+          body: 'Here is the response.'
+      },
+      trigger:{
+          seconds: 1
+      }
+  })
   };
+
+  // notification useEffect --GA
+  useEffect(() => { 
+    // how user interact with notification when app is not running -- GA
+    // will lead the user back to the app -- GA
+    const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
+        console.log(response)
+    })
+
+    // how user interact with notification when app is upfront running -- GA
+    const foregroundSubscription = Notifications.addNotificationReceivedListener(
+        (notification) => {
+            console.log(notification)
+        }
+        
+    )
+
+    return () => {
+        backgroundSubscription.remove()
+        foregroundSubscription.remove()
+    }
+}, []
+)
+
+
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
