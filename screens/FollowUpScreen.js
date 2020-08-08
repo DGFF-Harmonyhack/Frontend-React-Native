@@ -1,10 +1,14 @@
-// TO DO 
+// TO DO
 // [DONE - Dom]Submit needs to do an update dispatch for event resolved_stat + comment
-// [DONE - Dom]Needs confirmation Modal 
+// [DONE - Dom]Needs confirmation Modal
 // navigate to mapscreen instead onSubmit
 
 // in the diagram, this is #2,
 // it will have all the follow up stuff for the person who pressed the button
+
+// add touchablewithout feedback for onpress hide keyboard
+// add keyboardavoidingview to make stuff stay visible
+// MOdal confirm should switch to map
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, Dimensions, Modal, TouchableOpacity } from 'react-native';
@@ -12,7 +16,7 @@ import * as eventsActions from '../store/actions/events';
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../constants/Colors'
 
-// notification 
+// notification
 import * as Notifications from 'expo-notifications'
 
 // while app run upfront, the local notification will show --GA
@@ -44,7 +48,7 @@ const FollowUpScreen = props => {
         // user id / user uuid / event id / resolved boolean based on which button / description
         // dispatch(eventsActions.updateEvent({ ...currentEvent, resolved_stat: isResolved, description: descriptionField }))
 
-    //  when updating the event onSubmit use below 
+    //  when updating the event onSubmit use below
     //  dispatch(eventsActions.updateEvent(user_id, event_id, description, resolved_stat))
 
     const buttonSelectorHelper = (buttonValue) => {
@@ -64,9 +68,9 @@ const FollowUpScreen = props => {
         // this should probably go to some kind of details confirm?
         navigation.navigate("Home")
     }
-    
+
         // notification --GA
-    useEffect(() => { 
+    useEffect(() => {
         // how user interact with notification when app is not running -- GA
         // will lead the user back to the app -- GA
         const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
@@ -78,7 +82,7 @@ const FollowUpScreen = props => {
             (notification) => {
                 console.log(notification)
             }
-            
+
         )
 
         return () => {
@@ -90,7 +94,7 @@ const FollowUpScreen = props => {
 
     const resolutionStatusHandler = (eventStatus) => {
         // eventStatus === "Safe" ? setIsResolved(true) : setIsResolved(false)
-      
+
         if(eventStatus === "Safe"){
             setIsResolved(true)
             // console.log("resolutionStatuHandler TRUE")
@@ -113,7 +117,7 @@ const FollowUpScreen = props => {
 
         })
         }
-       
+
     }
 
 
@@ -142,13 +146,13 @@ const FollowUpScreen = props => {
                     </View>
                     <View style={styles.modalButtonContainer}>
                         <View style={styles.modalButton}>
-                            <Button 
+                            <Button
                                 title="YES"
                                 onPress={() => {submitHelperInModal(isSelectedSafeButton? "Safe": "Help")}}
                             />
                         </View>
                         <View style={styles.modalButton}>
-                            <Button 
+                            <Button
                                 title="NO"
                                 onPress={() => {setConfirmationModal(false)}}
                             />
@@ -165,14 +169,14 @@ const FollowUpScreen = props => {
             </View>
             <View style={styles.buttonContainer}>
                 <View style={[isSelectedSafeButton? styles.unSelected : styles.selected]} >
-                    <Button 
+                    <Button
                         title="I AM SAFE"
                         onPress={() => {buttonSelectorHelper("Safe")}}
                         accessibilityLabel="I am safe"
                     />
                 </View>
                 <View style={[isSelectedEvidenceButton ? styles.unSelected : styles.selected]} >
-                    <Button 
+                    <Button
                         title="I NEED EVIDENCE"
                         onPress={() => {buttonSelectorHelper("Help")}}
                         accessibilityLabel="I need evidence"
@@ -182,7 +186,7 @@ const FollowUpScreen = props => {
             <View>
                 <TextInput
                     {...props}
-                    multiline 
+                    multiline
                     numberOfLines={20}
                     style={styles.inputBox}
                     onChangeText={text => setDescriptionField(text)}
@@ -191,13 +195,13 @@ const FollowUpScreen = props => {
                 />
             </View>
             <View>
-                {/* <Button 
+                {/* <Button
                     style={styles.submitButton}
-                    title="Submit" 
+                    title="Submit"
                     onPress={() => {setConfirmationModal(true)}}
                     accessibilityLabel="Submit your follow up."
                 /> */}
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.submitButton}
                     onPress={() => {setConfirmationModal(true)}}
                 >
@@ -210,15 +214,15 @@ const FollowUpScreen = props => {
 
 const styles = StyleSheet.create({
     selected: {
-        // backgroundColor: 'white', 
-    }, 
+        // backgroundColor: 'white',
+    },
     unSelected: {
-        backgroundColor: Colors.pale, 
+        backgroundColor: Colors.pale,
     },
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '80%', 
+        width: '80%',
         marginBottom: Dimensions.get('window').height * 0.05
     },
     main: {
@@ -227,21 +231,21 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     inputBox: {
-        borderColor: 'black', 
-        borderWidth: 1, 
+        borderColor: 'black',
+        borderWidth: 1,
         padding: 10,
-        width: '80%', 
-        marginBottom: Dimensions.get('window').height * 0.05, 
-        // this is the height value 
-        height: Dimensions.get('window').height * 0.3, 
-        // this is the width value 
+        width: '80%',
+        marginBottom: Dimensions.get('window').height * 0.05,
+        // this is the height value
+        height: Dimensions.get('window').height * 0.3,
+        // this is the width value
         width: Dimensions.get('window').width * 0.8
     },
     modalContentContainer: {
         flex: .7,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22    
+        marginTop: 22
     },
     modalButtonContainer: {
         flexDirection: 'row',
@@ -250,52 +254,52 @@ const styles = StyleSheet.create({
     },
     modalButton: {
         margin: 30,
-    }, 
+    },
     textContainer: {
         alignItems: 'center',
-        justifyContent: 'center', 
+        justifyContent: 'center',
         marginBottom: Dimensions.get('window').height * 0.07
-    }, 
+    },
     followUpScreenText: {
-        fontSize: 30, 
+        fontSize: 30,
         fontWeight: '700',
         // backgroundColor: Colors.snow
-        
-    }, 
+
+    },
     submitButton: {
         height: Dimensions.get('window').height * 0.2,
         alignItems: "center",
-        padding: 10, 
-    }, 
+        padding: 10,
+    },
     submitButtonText: {
-        fontSize: 25, 
+        fontSize: 25,
 
     },
     modalTextContainer: {
         alignItems: 'center',
-        justifyContent: 'center', 
+        justifyContent: 'center',
         marginBottom: Dimensions.get('window').height * 0.07
-    }, 
+    },
     modalScreenText: {
-        fontSize: 30, 
+        fontSize: 30,
         fontWeight: '700',
-        
-    }, 
+
+    },
     modalHeaderContainer: {
         alignItems: 'center',
-        justifyContent: 'center', 
-        marginBottom: Dimensions.get('window').height * 0.01, 
-        borderWidth: 1, 
+        justifyContent: 'center',
+        marginBottom: Dimensions.get('window').height * 0.01,
+        borderWidth: 1,
         borderColor: 'white',
         borderBottomColor: 'black'
     },
     descriptionHeader: {
-        fontSize: 22, 
+        fontSize: 22,
         fontWeight: '400',
 
-    }, 
+    },
     descriptionText: {
-        fontSize: 18, 
+        fontSize: 18,
 
     }
 })

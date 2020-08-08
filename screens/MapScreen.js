@@ -8,7 +8,7 @@
 
 // if click on marker or list item, show description then button to navigate to CONFIRMATION SCREEN
 
-
+// Maybe copy over response flatlist to fill description area
 
 
 // this is actually 4 + 5 but with conditional rendering for the "List of saved" component and button
@@ -31,7 +31,7 @@ const MapScreen = props => {
   const [event, selectEvent] = useState({});
 
   const dispatch = useDispatch()
-  const savedEvents = useSelector(state => state.events.savedEvents) 
+  const savedEvents = useSelector(state => state.events.savedEvents)
   const currentEvent = useSelector((state) => state.events.currentEvent)
   const currentUserId = useSelector(state => state.users.user_id)
 
@@ -66,7 +66,7 @@ const MapScreen = props => {
           <Text>{descriptionText}</Text>
 
           {/* REspond button sends you to confirmation page. idk how to put it in the bottom corner */}
-         
+
         </View>
         <Button
             title='Respond'

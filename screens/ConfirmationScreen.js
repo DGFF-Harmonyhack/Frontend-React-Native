@@ -10,6 +10,9 @@
 //X drop down for response
 //X + useState
 
+// WHy isnt flatlist scrilling
+// Push notification and alert on Response crewation
+
 // this is # 3, the confirmation screen
 
 import React, { useState } from 'react';
