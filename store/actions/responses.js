@@ -35,7 +35,7 @@ export const createResponse = (user_id, event_id, response_type, details) => {
             })
         })
         const responseData = await response.json()
-        console.log(responseData)
+        console.log('create response action', responseData)
 
         dispatch({
             type: CREATE_RESPONSE,

@@ -47,11 +47,11 @@ const HomeScreen = props => {
     // boolean switch to see if setListOfSavedReqs needs to be run
     const [isThereNewSave, setIsThereNewSave] = useState(false);
 
-    // redux testing 
+    // redux testing
     const currentUserId = useSelector(state => state.users.user_id)
     const allEvents = useSelector(state => state.events.allEvents)
     // allEvents.sort((event) => { event.create_at })
-    // const savedEvents = useSelector(state => state.events.savedEvents) 
+    // const savedEvents = useSelector(state => state.events.savedEvents)
     const currentEvent = useSelector(state => state.events.currentEvent)
 
     const allResponses = useSelector(state => state.responses.allResponses)
@@ -104,7 +104,7 @@ const HomeScreen = props => {
 
     // component did mount
     useEffect(() => {
-        // changeDummyAsyncId()
+        changeDummyAsyncId()
         // console.log("pulled from state", userIdInRedux)
         readData()
         dispatch(eventsActions.fetchEvents())
@@ -138,7 +138,7 @@ const HomeScreen = props => {
 
 
 
-    // test new 
+    // test new
     // you have to change the args with dummy data from your rails localhost:3000/____
     const createNewHandler = () => {
         // user_id, has_evidence, comment, event_id
@@ -221,22 +221,22 @@ const HomeScreen = props => {
 // this is literally just here so we have a template to mess with when we google styling
 const styles = StyleSheet.create({
     main: {
-        flex: 1, 
-        margin: 5, 
-        
+        flex: 1,
+        margin: 5,
+
     },
     flatList: {
         height: 200
-    }, 
+    },
     header: {
         alignItems: 'center',
-        justifyContent: 'center', 
-        backgroundColor: Colors.gray, 
+        justifyContent: 'center',
+        backgroundColor: Colors.gray,
         margin: 10
     },
     headerText: {
-        fontSize: 30, 
-        fontWeight: '700', 
+        fontSize: 30,
+        fontWeight: '700',
     }
 });
 export default HomeScreen;

@@ -18,9 +18,9 @@ import * as eventsActions from '../store/actions/events'
 const Map = props => {
     const allEvents = useSelector(state => state.events.allEvents)
     const currentEvent = useSelector(state => state.events.currentEvent)
-    
-    let defaultLat = currentEvent ? currentEvent.lat : 40.78825
-    let defaultLong = currentEvent ? currentEvent.long : -73.94
+
+    let defaultLat = currentEvent ? parseFloat(currentEvent.lat) : 40.78825
+    let defaultLong = currentEvent ? parseFloat(currentEvent.long) : -73.94
 
     const dispatch = useDispatch()
     const dummyArray = [{id: 1}, {id: 2}]
@@ -29,6 +29,7 @@ const Map = props => {
       return allEvents.map((event) => {
         return (
           <MapView.Marker
+            key={event.id}
             onPress={() => {dispatch(eventsActions.setCurrentEvent(event))}}
             coordinate= {{latitude: parseFloat(event.lat), longitude: parseFloat(event.long),}}
             title={event.description}
@@ -59,8 +60,8 @@ const Map = props => {
             title={"marker.title"}
             description= {"lolz"}
           /> */}
-          </MapView> 
-        </View>    
+          </MapView>
+        </View>
   )
 }
 
