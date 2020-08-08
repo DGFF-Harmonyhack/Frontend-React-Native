@@ -2,7 +2,7 @@
 ![alt text](https://github.com/DGFF-Harmonyhack/Frontend-React-Native/blob/master/logo.png "Record Me")
 
 # Demo
-<a href="https://www.youtube.com/watch?v=mZlK-NMBzeE&feature=youtu.be" target="_blank"><img src="http://i3.ytimg.com/vi/mZlK-NMBzeE/maxresdefault.jpg" alt="Demo Video" width="560" height="315" border="10" /></a>
+<a href="https://www.youtube.com/watch?v=mZlK-NMBzeE&feature=youtu.be" target="_blank"><img src="https://i3.ytimg.com/vi/mZlK-NMBzeE/hqdefault.jpg" alt="Demo Video" width="560" height="315" border="10" /></a>
 
 # RECORD ME 
 ** To get it started** 
