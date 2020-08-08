@@ -1,5 +1,5 @@
 # README
-![alt text](https://github.com/GAierken/Frontend-React-Native/raw/master/logo.png "Record Me")
+![alt text](https://github.com/DGFF-Harmonyhack/Frontend-React-Native/blob/master/logo.png "Record Me")
 
 # RECORD ME 
 ** To get it started** 
