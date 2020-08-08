@@ -1,5 +1,9 @@
 export default Colors = {
+    // big main button
     red: '#A31621', 
+    // used as selector in FollowUpScreen
+    pale: '#90C2E7', 
+
     gray: '#CED3DC', 
     teal: '#4E8098', 
     pale: '#90C2E7', 

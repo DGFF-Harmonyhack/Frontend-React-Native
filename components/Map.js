@@ -8,7 +8,7 @@
 
 // the map for 3/4/5
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import MapView from 'react-native-maps';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { useSelector, useDispatch, createStoreHook } from 'react-redux'
@@ -17,6 +17,11 @@ import * as eventsActions from '../store/actions/events'
 
 const Map = props => {
     const allEvents = useSelector(state => state.events.allEvents)
+    const currentEvent = useSelector(state => state.events.currentEvent)
+    
+    let defaultLat = currentEvent ? currentEvent.lat : 40.78825
+    let defaultLong = currentEvent ? currentEvent.long : -73.94
+
     const dispatch = useDispatch()
     const dummyArray = [{id: 1}, {id: 2}]
 
@@ -32,6 +37,9 @@ const Map = props => {
         )
       })
     }
+    // useEffect(() => {
+    //   console.log("map currentEvent", currentEvent)
+    // })
 
   console.log('map');
     return (
@@ -39,8 +47,8 @@ const Map = props => {
           <MapView style={styles.mapStyle}
             showsUserLocation
             initialRegion = {{
-              latitude:40.78825,
-              longitude: -73.94,
+              latitude: defaultLat,
+              longitude: defaultLong,
               latitudeDelta: 0.1,
               longitudeDelta: 0.05
             }}
