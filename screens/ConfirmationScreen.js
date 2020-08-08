@@ -16,7 +16,7 @@
 // this is # 3, the confirmation screen
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback, FlatList, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
 
@@ -59,7 +59,7 @@ const ConfirmationScreen = props => {
       // Temp fix with random user and event
 
     dispatch(responsesActions.createResponse(fakeUser, currentEvent.id, responseChoice, inputResponse))
-    // local notification 
+    // local notification
     Notifications.scheduleNotificationAsync({
       content: {
           title: "Response submitted",
@@ -72,7 +72,7 @@ const ConfirmationScreen = props => {
   };
 
   // notification useEffect --GA
-  useEffect(() => { 
+  useEffect(() => {
     // how user interact with notification when app is not running -- GA
     // will lead the user back to the app -- GA
     const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
@@ -84,7 +84,7 @@ const ConfirmationScreen = props => {
         (notification) => {
             console.log(notification)
         }
-        
+
     )
 
     return () => {
@@ -102,10 +102,11 @@ const ConfirmationScreen = props => {
          style={styles.main}
          behavior={Platform.OS == "ios" ? "padding" : "height"}
       >
-
+      <View style={styles.eventDetail}>
           <Text>{currentEvent.description}</Text>
           <Text>{currentEvent.lat}, {currentEvent.long}</Text>
           <Text>{currentEvent.created_at}</Text>
+      </View>
 
 
           <View style={styles.dropdown}>
@@ -153,11 +154,10 @@ const ConfirmationScreen = props => {
             selectTextOnFocus={true}
           />
 
-          <View style={styles.submitButton}>
-            <Button
-              title="Submit Response"
-              onPress={submitEvent} />
-          </View>
+
+            <TouchableOpacity onPress={submitEvent} style={styles.submitButton}>
+              <Text style={styles.buttonText}>Submit Response</Text>
+            </TouchableOpacity>
         </View>
 
         {/* SHow event details */}
@@ -194,29 +194,51 @@ const styles = StyleSheet.create({
     detailsRegion: {
       height: Dimensions.get('window').height * .333,
       borderColor: 'blue',
-      borderWidth: 2,
+      borderWidth: 1,
       width: Dimensions.get('window').width * .9,
       marginTop: Dimensions.get('window').height * .05,
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     pickerText: {},
     textInput: {
       width: Dimensions.get('window').width * .9,
       borderColor: 'blue',
-      borderWidth: 2,
+      borderWidth: 1,
       height: Dimensions.get('window').height * .15,
+      borderRadius: 15
     },
-    textBoxArea: {},
+    textBoxArea: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     submitButton: {
       height: 50,
       marginTop: 5,
       backgroundColor: 'blue',
-      marginBottom: .5
+      alignItems: 'center',
+      justifyContent:'center',
+      borderRadius: 50,
+      width: Dimensions.get('window').width * .6,
     },
-    responseType: {},
-    responseDetail: {},
+    buttonText: {
+      fontSize: 20,
+      color: 'snow'
+    },
+    responseType: {
+      fontSize: 20,
+    },
+    responseDetail: {
+      fontSize: 18,
+    },
     responseListItem: {
       marginTop: 15,
-      borderWidth: 1
+    },
+    eventDetail: {
+      alignItems:'center',
+      justifyContent:'center',
+      marginTop: Dimensions.get('window').height * .05,
     }
 })
 

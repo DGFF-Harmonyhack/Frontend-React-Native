@@ -7,7 +7,7 @@ import {
 const initialState ={
     user_id: "",
     uu: "",
-    location: ''
+    location: {}
 }
 
 const usersReducer = (state = initialState, action) => {

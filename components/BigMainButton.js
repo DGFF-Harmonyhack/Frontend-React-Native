@@ -47,10 +47,17 @@ const BigMainButton = props => {
     // mimic the syntax and use navigation inside of a component
     const navigation = useNavigation();
 
+    // Dummy initial location values
+    let latitude = -53.2819099722496, longitude = -137.337367605752
+
     const currentUserId = useSelector(state => state.users.user_id)
-    const { latitude, longitude } = useSelector(state => state.users.location.coords)
+    const userLocation = useSelector(state => state.users.location.coords)
     const dispatch = useDispatch()
 
+    if (userLocation) {
+      latitude = userLocation.latitude;
+      longitude = userLocation.longitude;
+    }
 
     //
     // use onPress dispatch(eventsActions.createEvent(user_id, lat, long))
@@ -156,7 +163,6 @@ const styles = StyleSheet.create({
         color: 'snow'
     },
     button: {
-        alignItems: 'center',
         padding: 10,
         borderRadius: 500,
         alignItems:'center',

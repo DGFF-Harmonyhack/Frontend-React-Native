@@ -38,8 +38,8 @@ const FollowUpScreen = props => {
 
     // i need to setIsResolved when button click
     const [isResolved, setIsResolved] = useState(false)
-
-    const { navigation } = props
+console.log('Props:', props);
+    const { navigation } = props;
 
     const currentEvent = useSelector((state) => state.events.currentEvent)
     const currentUserId = useSelector(state => state.users.user_id)

@@ -16,7 +16,7 @@ import MapScreen from './screens/MapScreen'
 import * as Permissions from 'expo-permissions'
 import { Notifications } from 'expo';
 
-// redux stuff 
+// redux stuff
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import eventsReducer from './store/reducers/events';
 import usersReducer from './store/reducers/users'
@@ -24,7 +24,7 @@ import responsesReducer from './store/reducers/responses'
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
-// redux stuff 
+// redux stuff
 const rootReducer = combineReducers({
   events: eventsReducer,
   users: usersReducer,
@@ -38,11 +38,11 @@ const Stack = createStackNavigator()
 export default function App() {
 
   // store token -- GA
-  const [pushToken, setPushToken] = useState('') 
+  const [pushToken, setPushToken] = useState('')
    ///check notification permission status, when app is opened this will make sure to ask permission (ios only, android doesn't need it) -- GA
    useEffect(() => {
     Permissions.getAsync(Permissions.NOTIFICATIONS).then(statusObj => {
-      
+
         if(statusObj.status !== 'granted'){
             return Permissions.askAsync(Permissions.NOTIFICATIONS)
         }
@@ -57,13 +57,13 @@ export default function App() {
       return Notifications.getExpoPushTokenAsync()
     }
     ).then(response=> {
-   
+
       const token = response
       setPushToken(token)
       // fetch should be done to send back every pushToken to backend -- GA
-     
+
       // use expo push notification tool to test the token https://expo.io/notifications --GA
-      
+
     })
     .catch(err => {
       return null
@@ -80,13 +80,17 @@ export default function App() {
             <Stack.Screen name="Home" >
                 {props => <HomeScreen {...props} pushToken={pushToken} />}
             </Stack.Screen>
+
             <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
             {/* <Stack.Screen name="FollowUp" component={FollowUpScreen} /> */}
             {/*pass down pushToken */}
             <Stack.Screen name="FollowUp" >
                 {props => <FollowUpScreen {...props} pushToken={pushToken} />}
             </Stack.Screen>
-            <Stack.Screen name="Map" component={MapScreen} />
+
+            <Stack.Screen name="Map" >
+              {props => <MapScreen {...props} pushToken={pushToken} />}
+            </Stack.Screen>
           </Stack.Navigator>
       </NavigationContainer>
     </Provider>
@@ -102,5 +106,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-

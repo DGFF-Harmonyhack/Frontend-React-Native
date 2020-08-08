@@ -40,7 +40,7 @@ const MapScreen = props => {
 
   let descriptionText = currentEvent ? currentEvent.description : "Please Select An Event"
 
-  const navigation = useNavigation();
+  const { navigation } = props;
 
     return (
       <View style={styles.main}>
