@@ -48,7 +48,9 @@ const BigMainButton = props => {
     const navigation = useNavigation();
 
     const currentUserId = useSelector(state => state.users.user_id)
+    const { latitude, longitude } = useSelector(state => state.users.location.coords)
     const dispatch = useDispatch()
+
 
     //
     // use onPress dispatch(eventsActions.createEvent(user_id, lat, long))
@@ -95,7 +97,7 @@ const BigMainButton = props => {
         navigation.navigate('FollowUp')
         // push notification -- GA
         //https://exp.host/--/api/v2/push/send expo server -- GA
-        
+
         // fetch('https://exp.host/--/api/v2/push/send', {
         //     method: 'POST',
         //     headers: {
@@ -117,7 +119,7 @@ const BigMainButton = props => {
         let dummyLat = -53.2819099722496
         let dummyLong = -137.337367605752
 
-        dispatch(eventsActions.createEvent(currentUserId, dummyLat, dummyLong))
+        dispatch(eventsActions.createEvent(currentUserId, latitude, longitude))
         navigation.navigate('FollowUp')
     }
 

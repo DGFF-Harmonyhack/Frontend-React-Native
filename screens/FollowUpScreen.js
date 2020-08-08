@@ -11,7 +11,7 @@
 // MOdal confirm should switch to map
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, TextInput, Dimensions, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, Dimensions, Modal, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard } from 'react-native';
 import * as eventsActions from '../store/actions/events';
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../constants/Colors'
@@ -144,7 +144,11 @@ const FollowUpScreen = props => {
 
 
     return (
-        <View style={styles.main}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView
+           style={styles.main}
+           behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
             <View >
                 <Modal
                     animationType="slide"
@@ -230,7 +234,8 @@ const FollowUpScreen = props => {
                     <Text style={styles.submitButtonText}>Submit</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
     )
 }
 
