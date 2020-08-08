@@ -19,7 +19,7 @@ export const fetchResponses = () => {
 
 // fill in the values needed ******
 
-export const createResponse = (user_id, event_id, event_type, details) => {
+export const createResponse = (user_id, event_id, response_type, details) => {
     return async dispatch => {
         // any async code you want
         const response = await fetch(`${BackendAddress.API}/responses`, {
@@ -30,12 +30,12 @@ export const createResponse = (user_id, event_id, event_type, details) => {
             body: JSON.stringify({
                 user_id,
                 event_id,
-                event_type,
+                response_type,
                 details
             })
         })
         const responseData = await response.json()
-        console.log(responseData)
+        console.log('create response action', responseData)
 
         dispatch({
             type: CREATE_RESPONSE,

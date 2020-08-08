@@ -28,7 +28,7 @@ const eventsReducer = (state = initialState, action) => {
                 savedEvents: action.events.filter((event) => event.user_id === 116)
             }
         case CREATE_EVENT: 
-            console.log("create_event action.events", action.events)
+            // console.log("create_event action.events", action.events)
             return {
                 ...state, 
                 allEvents: [
@@ -51,6 +51,7 @@ const eventsReducer = (state = initialState, action) => {
                 currentEvent: action.events
             }
         case SET_CURRENT_EVENT: 
+            // console.log("reducers/events setting current event ", action.event)
             return {
                 ...state, 
                 currentEvent: action.event

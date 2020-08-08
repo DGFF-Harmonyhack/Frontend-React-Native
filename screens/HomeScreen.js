@@ -3,6 +3,7 @@
 // styling
 //
 
+// Make see more request a bigger nicer button
 
 
 // Obviously the home screen with the giant button and etc
@@ -20,6 +21,9 @@ import * as responsesActions from '../store/actions/responses'
 
 //asyncstorage, this is sqlite/persistence + localstorage + react-native
 import AsyncStorage from '@react-native-community/async-storage';
+
+import Colors from '../constants/Colors'
+
 
 
 // this is an example for storing strings, the most basic level but if you want to store objects go to docs, link below
@@ -44,11 +48,11 @@ const HomeScreen = props => {
     // boolean switch to see if setListOfSavedReqs needs to be run
     const [isThereNewSave, setIsThereNewSave] = useState(false);
 
-    // redux testing 
+    // redux testing
     const currentUserId = useSelector(state => state.users.user_id)
     const allEvents = useSelector(state => state.events.allEvents)
     // allEvents.sort((event) => { event.create_at })
-    // const savedEvents = useSelector(state => state.events.savedEvents) 
+    // const savedEvents = useSelector(state => state.events.savedEvents)
     const currentEvent = useSelector(state => state.events.currentEvent)
 
     const allResponses = useSelector(state => state.responses.allResponses)
@@ -74,7 +78,7 @@ const HomeScreen = props => {
         // this is just for debugging. it is triggered in a useEffect below uncomment it if you want to change dummyid in async
         // change the value for newDummyIdString to what you want the initial AsyncStorage 'user_id' to be in persisted memory
         try {
-            let newDummyIdString = '219'
+            let newDummyIdString = '1'
             const userIdDummy = await AsyncStorage.setItem('user_id', newDummyIdString)
         } catch (err) {
             console.log("HomeScreen setItem(newDummyId) error", err)
@@ -101,11 +105,12 @@ const HomeScreen = props => {
 
     // component did mount
     useEffect(() => {
-        // changeDummyAsyncId()
+        changeDummyAsyncId()
         // console.log("pulled from state", userIdInRedux)
         readData()
         dispatch(eventsActions.fetchEvents())
         dispatch(responsesActions.fetchResponses())
+        dispatch(userActions.setLocation())
     }, [dispatch]);
 
     // debug useEffect
@@ -135,7 +140,7 @@ const HomeScreen = props => {
 
 
 
-    // test new 
+    // test new
     // you have to change the args with dummy data from your rails localhost:3000/____
     const createNewHandler = () => {
         // user_id, has_evidence, comment, event_id
@@ -151,33 +156,36 @@ const HomeScreen = props => {
 
     return (
         <View style={styles.main}>
-            <Text>The HomeScreen</Text>
-            <Text>Welcome to ___________</Text>
+            <View style={styles.header}>
+                {/*<Text style={styles.headerText}>APP HEADER</Text>*/}
+            </View>
             {/* custom button component  */}
             <BigMainButton  pushToken={props.pushToken}/>
             {/* i think these should probably be replaced by custom components to style + css up */}
-            <Button
-                title="See More Requests"
-                onPress={() => navigation.navigate('Map')}
-            />
-            {/* this is how you pass down props, second arg  */}
-            <Button
-                title="See Saved Requests"
-                onPress={() => navigation.navigate('Map', {
-                    listOfSavedReqs: listOfSavedReqs
-                })}
-            />
+            <View>
+                <Button
+                    title="See More Requests"
+                    onPress={() => navigation.navigate('Map')}
+                />
+                {/* this is how you pass down props, second arg  */}
+                {/*<Button
+                    title="See Saved Requests"
+                    onPress={() => navigation.navigate('Map', {
+                        listOfSavedReqs: listOfSavedReqs
+                    })}
+                />*/}
+            </View>
 
 
-            <Button
+            {/* <Button
                 title="TEST NEW"
                 onPress={createNewHandler}
-            />
+            /> */}
 
 
             {/* redux + componentDidMount testing  */}
 
-            <Text>All Responses</Text>
+            {/* <Text>All Responses</Text>
             <View style={styles.flatList}>
                 {allResponses.map((response) => (
                     <View key={response.id}>
@@ -205,7 +213,7 @@ const HomeScreen = props => {
                         <Text>Event updated_at: {event.updated_at}</Text>
                     </View>
                 ))}
-            </View>
+            </View> */}
 
 
         </View>
@@ -215,10 +223,22 @@ const HomeScreen = props => {
 // this is literally just here so we have a template to mess with when we google styling
 const styles = StyleSheet.create({
     main: {
-        flex: 0.3
+        flex: 1,
+        margin: 5,
+
     },
     flatList: {
         height: 200
+    },
+    header: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: Colors.gray,
+        margin: 10
+    },
+    headerText: {
+        fontSize: 30,
+        fontWeight: '700',
     }
 });
 export default HomeScreen;
